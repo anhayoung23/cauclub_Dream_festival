@@ -27,3 +27,18 @@ hamburger.addEventListener('click', () => {
 posterContainer.addEventListener('click', () => {
   posterContainer.classList.toggle('flip');
 });
+
+// ✅ 이미지 자동 슬라이드 기능
+const slides = document.querySelectorAll("#slider img");
+let current = 0;
+
+setInterval(() => {
+  // 현재 이미지 숨기기
+  slides[current].classList.remove("active");
+
+  // 다음 이미지로 이동 (마지막이면 0으로 초기화)
+  current = (current + 1) % slides.length;
+
+  // 새 이미지 표시
+  slides[current].classList.add("active");
+}, 3000); // 3초마다 전환
