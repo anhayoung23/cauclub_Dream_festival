@@ -152,24 +152,27 @@ main {
   align-items: center;
 }
 
-/* ✅ 포스터 Flip 애니메이션 */
+/* ✅ 포스터 컨테이너 */
 .poster-container {
-  width: 300px;
-  height: 450px;
-  perspective: 1000px;       /* 3D 효과 */
+  width: 90%; /* 모바일에서 꽉 차지 않게 */
+  max-width: 320px; /* 데스크탑에서도 적당한 크기 */
+  height: 450px; /* 고정 높이 */
+  margin: 0 auto;
+  perspective: 1000px;
   position: relative;
 }
 
 
+/* ✅ 앞면과 뒷면 동일 크기 */
 .poster-front,
 .poster-back {
   width: 100%;
   height: 100%;
   position: absolute;
-  backface-visibility: hidden; /* 뒷면 숨김 */
+  backface-visibility: hidden;
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.8s;  /* 회전 애니메이션 */
+  transition: transform 0.8s ease;
   transform-style: preserve-3d;
 }
 
