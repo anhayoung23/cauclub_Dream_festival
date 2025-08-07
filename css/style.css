@@ -40,7 +40,7 @@ nav {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 18px 18px 12px 18px; /* header 높이 늘림 */
+  padding: 18px 18px 12px 18px;
 }
 .logo-container {
   display: flex;
@@ -101,14 +101,14 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 34px;      /* 작게 */
+  width: 34px;
   height: 34px;
   padding: 0;
   gap: 4px;
   cursor: pointer;
 }
 .hamburger span {
-  width: 22px;      /* 작게 */
+  width: 22px;
   height: 3px;
   background: var(--mint);
   border-radius: 2px;
@@ -117,23 +117,22 @@ nav {
 }
 
 /* ================================
-   ✅ 메인, 포스터(더 크게, header와 겹치지 않게)
+   ✅ 메인, 포스터(세로형 전체 다 보이게, header와 겹치지 않게)
 ================================= */
 main {
-  padding-top: 130px;      /* header보다 더 여유있게 */
-  padding-bottom: 70px;    /* footer 공간 충분히 */
+  padding-top: 130px;   /* header보다 여유있게 */
+  padding-bottom: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 50vh;
 }
 .poster-container {
-  width: 100vw;                /* 화면 가득 */
-  max-width: 500px;            /* PC에선 너무 커지지 않게 */
-  height: auto;
-  min-height: 350px;
+  width: 100vw;
+  max-width: 420px;           /* PC에서 너무 넓지 않게 */
+  aspect-ratio: 3/4;          /* 세로 포스터 비율(3:4, 예: 375x500) */
+  margin: 12px auto 0 auto;
   background: #fff;
-  margin: 12px auto 0 auto;    /* 위쪽 여백 추가 */
   border-radius: 24px;
   display: flex;
   justify-content: center;
@@ -154,13 +153,12 @@ main {
 }
 .poster-front img {
   width: 100%;
-  height: auto;                 /* 이미지 비율 유지 */
-  object-fit: cover;            /* 꽉 채움(잘림 있을 수 있음) */
-  display: block;
+  height: 100%;
+  object-fit: contain;         /* cover → contain! (세로포스터 전체 다 보이게) */
   border-radius: 24px;
   background: #fff;
+  display: block;
 }
-
 /* flip */
 .poster-container.flip .poster-front { transform: rotateY(180deg);}
 .poster-container.flip .poster-back { transform: rotateY(360deg);}
@@ -331,12 +329,11 @@ footer {
   .slider-container img {
     height: 220px;
   }
-  /* 포스터 모바일: 화면 최대 크기로 */
+  /* 포스터 모바일: 세로 비율 최대, 전체 다 보이게 */
   .poster-container {
     max-width: 98vw;
-    min-height: 1px;
+    aspect-ratio: 3/4;
     border-radius: 12px;
-    padding: 0;
     margin-top: 8px;
   }
   .poster-front,
@@ -345,7 +342,7 @@ footer {
     border-radius: 12px;
   }
   main {
-    padding-top: 114px; /* 모바일 header 크기 반영 */
+    padding-top: 114px;
     padding-bottom: 58px;
   }
 }
