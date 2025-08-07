@@ -280,7 +280,7 @@ main {
   text-align: center;
 }
 
-/* ✅ 메인 컨텐츠 */
+/* ✅ about 페이지 메인 영역 */
 .about-section {
   max-width: 900px;
   margin: 120px auto 60px;
@@ -288,12 +288,14 @@ main {
   padding: 20px;
 }
 
+/* ✅ 타이틀 */
 .about-section h1 {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 2rem;
   margin-bottom: 10px;
 }
 
+/* ✅ 설명 문장 */
 .about-section p {
   font-family: 'Jua', sans-serif;
   font-size: 1.1rem;
@@ -312,30 +314,34 @@ main {
   border-radius: 12px;
 }
 
+/* ✅ 슬라이드 이미지 */
 .slider-container img {
   width: 100%;
-  height: 350px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: cover;        /* 비율 유지하며 영역 채우기 */
   position: absolute;
+  top: 0;
+  left: 0;
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  border-radius: 12px;
 }
 
+/* ✅ 현재 이미지 표시 */
 .slider-container img.active {
   opacity: 1;
 }
 
-/* ✅ 반응형 */
+/* ✅ 모바일 대응 */
 @media (max-width: 768px) {
   .slider-container {
     height: 220px;
   }
+
   .slider-container img {
     height: 220px;
   }
 }
-
-
 
 /* ✅ 푸터 */
 footer {
