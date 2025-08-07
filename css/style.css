@@ -131,7 +131,7 @@ main {
   width: 100vw;
   max-width: 420px;           /* PC에서 너무 넓지 않게 */
   aspect-ratio: 3/4;          /* 세로 포스터 비율(3:4, 예: 375x500) */
-  margin: 5px auto 0 auto;
+  margin: 0px auto 0 auto;
   background: #fff;
   border-radius: 24px;
   display: flex;
@@ -334,7 +334,7 @@ footer {
     max-width: 98vw;
     aspect-ratio: 3/4;
     border-radius: 12px;
-    margin-top: 15px;
+    margin-top: 0px;
   }
   .poster-front,
   .poster-back,
