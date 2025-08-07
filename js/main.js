@@ -32,3 +32,21 @@ posterContainer.addEventListener('click', () => {
 //   current = (current + 1) % slides.length;
 //   slides[current].classList.add("active");
 // }, 3000);
+
+/**
+ * ✅ 부스 소개 페이지: 카드 클릭 시 이미지 플립
+ * - 카드에 data-front, data-back 속성 필수!
+ */
+document.querySelectorAll('.club-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const cardInner = this.querySelector('.card-inner');
+    const img = cardInner.querySelector('img');
+    const frontSrc = this.getAttribute('data-front');
+    const backSrc = this.getAttribute('data-back');
+    const isFlipped = this.classList.toggle('flipped');
+    // 카드가 반쯤 돌아간 타이밍에 이미지 교체 (자연스럽게)
+    setTimeout(() => {
+      img.src = isFlipped ? backSrc : frontSrc;
+    }, 300); // card-inner transition-duration의 절반과 맞춤 (0.6s)
+  });
+});
