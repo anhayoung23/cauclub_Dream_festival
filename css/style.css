@@ -40,7 +40,7 @@ nav {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 18px 18px 12px 18px; /* 위아래 패딩 증가로 header가 두꺼워짐 */
+  padding: 18px 18px 12px 18px; /* header 높이 늘림 */
 }
 .logo-container {
   display: flex;
@@ -48,12 +48,12 @@ nav {
   text-decoration: none;
 }
 .main-logo {
-  height: 44px;             /* 로고 4px 더 큼 */
+  height: 44px;
   margin-right: 7px;
 }
 .logo-text {
   font-family: 'Jua', cursive;
-  font-size: 1.7rem;        /* 폰트 더 큼 */
+  font-size: 1.7rem;
   color: var(--mint);
   text-shadow: 0 2px 8px rgba(93,190,191,0.13);
   font-weight: bold;
@@ -94,46 +94,51 @@ nav {
 }
 
 /* ================================
-   ✅ 햄버거(모바일용)
+   ✅ 햄버거(모바일용, 크기 축소)
 ================================= */
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 34px;      /* 작게 */
+  height: 34px;
+  padding: 0;
   gap: 4px;
   cursor: pointer;
 }
 .hamburger span {
-  width: 25px;
+  width: 22px;      /* 작게 */
   height: 3px;
   background: var(--mint);
   border-radius: 2px;
   transition: all 0.3s;
+  margin: 0;
 }
 
 /* ================================
-   ✅ 메인, 포스터(중앙정렬, flip, 크게)
+   ✅ 메인, 포스터(더 크게, header와 겹치지 않게)
 ================================= */
 main {
-  padding-top: 110px;      /* header 공간 더 여유 */
-  padding-bottom: 70px;    /* footer 공간 넉넉히 */
+  padding-top: 130px;      /* header보다 더 여유있게 */
+  padding-bottom: 70px;    /* footer 공간 충분히 */
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 50vh;
 }
-
-/* ✅ 메인 포스터 영역 - 최대한 크게, 여백 최소화 */
 .poster-container {
   width: 100vw;                /* 화면 가득 */
   max-width: 500px;            /* PC에선 너무 커지지 않게 */
   height: auto;
   min-height: 350px;
   background: #fff;
-  margin: 0 auto;
+  margin: 12px auto 0 auto;    /* 위쪽 여백 추가 */
   border-radius: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .poster-front,
 .poster-back {
@@ -149,17 +154,18 @@ main {
 }
 .poster-front img {
   width: 100%;
-  height: auto;             /* 세로는 이미지 비율 유지 */
-  object-fit: cover;        /* 꽉 채움, 잘림 있음 */
+  height: auto;                 /* 이미지 비율 유지 */
+  object-fit: cover;            /* 꽉 채움(잘림 있을 수 있음) */
   display: block;
   border-radius: 24px;
   background: #fff;
 }
+
 /* flip */
 .poster-container.flip .poster-front { transform: rotateY(180deg);}
 .poster-container.flip .poster-back { transform: rotateY(360deg);}
 
-/* ✅ 포스터 뒷면 (생략/기본 동일) */
+/* ✅ 포스터 뒷면 */
 .poster-back {
   background: radial-gradient(circle,
     rgba(93,190,191,0.12),
@@ -262,11 +268,11 @@ footer {
   position: fixed;
   bottom: 0; left: 0; width: 100%;
   background: #f7fafc;
-  border-top-left-radius: 6px;   /* 작게 */
+  border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   color: #666;
-  font-size: 0.84rem;            /* 더 작음 */
-  padding: 4px 0 4px;            /* 패딩 최소화 */
+  font-size: 0.84rem;
+  padding: 4px 0 4px;
   box-shadow: 0 -2px 8px rgba(67,183,226,0.04);
   display: flex;
   justify-content: center;
@@ -283,7 +289,6 @@ footer {
    ✅ 모바일/반응형 스타일
 ================================= */
 @media (max-width: 768px) {
-  /* ✅ 모바일 메뉴: 세로 중앙정렬 */
   .nav-links {
     position: absolute;
     top: 70px; right: 10px;
@@ -307,7 +312,8 @@ footer {
     from { opacity: 0; transform: translateY(-12px);}
     to { opacity: 1; transform: translateY(0);}
   }
-  .hamburger { display: flex; }
+  .hamburger { display: flex; width: 32px; height: 32px; }
+  .hamburger span { width: 20px; height: 3px; }
   .nav-links li {
     width: 100%;
     text-align: center;
@@ -331,6 +337,7 @@ footer {
     min-height: 1px;
     border-radius: 12px;
     padding: 0;
+    margin-top: 8px;
   }
   .poster-front,
   .poster-back,
@@ -338,7 +345,7 @@ footer {
     border-radius: 12px;
   }
   main {
-    padding-top: 94px;
+    padding-top: 114px; /* 모바일 header 크기 반영 */
     padding-bottom: 58px;
   }
 }
