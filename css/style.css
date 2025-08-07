@@ -201,7 +201,7 @@ main {
 }
 
 /* ================================
-   ✅ 클럽 카드 그리드 (동일)
+   ✅ 클럽 카드 그리드 (플립 효과 적용)
 ================================= */
 .clubs-grid {
   display: grid;
@@ -209,37 +209,67 @@ main {
   gap: 20px;
   margin-top: 20px;
 }
+
+/* 각 동아리 카드 전체 영역 */
 .club-card {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  min-height: 320px;
+  overflow: hidden;
+  cursor: pointer;
+  /* 호버 시 약간 확대 */
+  transition: transform 0.2s;
 }
-.club-card img {
+.club-card:active {
+  transform: scale(0.97);
+}
+
+/* 이미지와 플립 애니메이션 적용을 위한 래퍼 */
+.card-inner {
   width: 100%;
   height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 플립 효과 */
+  transition: transform 0.6s cubic-bezier(.7, -0.2, .3, 1.4);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* 카드에 flipped 클래스가 붙으면 180도 Y축 회전 */
+.club-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* 이미지(1장만 보임) */
+.card-inner img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 8px;
+  /* 플립할 때 뒷면이 안 보이게 */
+  backface-visibility: hidden;
 }
-.club-card:hover { transform: scale(1.05); }
 
-/* ================================
-   ✅ 공통페이지 레이아웃
-================================= */
-.page-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 180px);
-  padding-top: 110px;
-  padding-bottom: 80px;
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
+/* 카드 하단 텍스트 스타일 */
+.club-card h2 {
+  margin-top: 18px;
+  font-size: 1.25em;
+  font-family: 'Jua', 'Noto Sans KR', sans-serif;
+  color: #1693a5;
 }
+.club-card p {
+  margin-top: 10px;
+  color: #333;
+  font-size: 1em;
+  font-family: 'Noto Sans KR', sans-serif;
+  min-height: 36px;
+}
+
 
 /* ================================
    ✅ about 페이지 메인 영역
