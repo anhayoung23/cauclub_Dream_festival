@@ -282,23 +282,14 @@ main {
    ✅ 푸터(라운드, 캐주얼)
 ================================= */
 footer {
-  position: fixed;
-  bottom: 0; left: 0; width: 100%;
-  background: #f7fafc;
-  border-top-left-radius: 22px;
-  border-top-right-radius: 22px;
-  color: #666;
-  font-size: 1rem;
-  padding: 14px 0 10px;
-  box-shadow: 0 -4px 16px rgba(67,183,226,0.08);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
+  font-size: 0.84rem;        /* 더 작은 폰트 */
+  padding: 4px 0 4px;        /* 상하 패딩 최소화 */
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 .footer-emoji {
-  font-size: 1.3rem;
-  margin-right: 5px;
+  font-size: 1.0rem;
+  margin-right: 4px;
 }
 
 /* ================================
