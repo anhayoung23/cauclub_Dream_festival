@@ -372,3 +372,11 @@ footer {
   }
   .footer-emoji { font-size: 0.95rem; }
 }
+
+.gradient-text {
+  background: linear-gradient(90deg, #43b7e2, #5dbebf, #e8410b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+}
