@@ -120,7 +120,7 @@ nav {
    ✅ 메인, 포스터(세로형 전체 다 보이게, header와 겹치지 않게)
 ================================= */
 main {
-  padding-top: 130px;   /* header보다 여유있게 */
+  padding-top: 100px;   /* header보다 여유있게 */
   padding-bottom: 70px;
   display: flex;
   justify-content: center;
