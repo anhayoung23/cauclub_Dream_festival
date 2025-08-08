@@ -210,29 +210,22 @@ main {
   margin-top: 20px;
 }
 
-/* 각 동아리 카드 전체 영역 */
 .club-card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  min-height: 320px;
-  overflow: hidden;
-  cursor: pointer;
-  /* 호버 시 약간 확대 */
-  transition: transform 0.2s;
-}
-.club-card:active {
-  transform: scale(0.97);
+  /* 카드 전체의 최소 높이 조정 */
+  min-height: 340px;       /* 전체 카드 높이 키움 */
+  display: flex;
+  flex-direction: column;
+  padding: 12px 8px 18px 8px;  /* 좌우/하단 패딩 추가 */
 }
 
-/* 카드 내부 이미지를 2장 겹치고, transition으로 슬라이드 */
 .card-inner {
-  position: relative;
+  /* 이미지 영역 비율을 충분히 크게 (예: 전체의 55~60%) */
   width: 100%;
-  height: 200px;
+  height: 200px;           /* 기존보다 더 크게(원하는 만큼 조정) */
+  flex-shrink: 0;
   overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 18px;     /* 이미지와 텍스트 사이 공간 */
 }
 
 .card-front,
@@ -240,57 +233,31 @@ main {
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0; left: 0;
+  left: 0; top: 0;
+  border-radius: 10px;
+  transition: transform 0.6s, opacity 0.45s;
   display: block;
-  border-radius: 8px;
-  /*box-shadow: 0 2px 8px rgba(0,0,0,0.07);*/
-  transition: 
-    transform 0.6s cubic-bezier(.7, -0.2, .3, 1.4),
-    opacity 0.45s cubic-bezier(.7, -0.2, .3, 1.4);
 }
 
-/* 카드 처음 상태: front는 완전 보임, back은 오른쪽에 25%만 보임(살짝 보이기) */
-.card-front {
-  z-index: 2;
-  transform: translateX(0);
-  opacity: 1;
-}
-.card-back {
-  z-index: 1;
-  /* 오른쪽에서 75% 가려짐, 25%만 보임 */
-  transform: translateX(65%);
-  opacity: 0.7;
-}
-
-/* 카드 클릭(플립) 상태: front는 왼쪽으로 밀려나서 25%만 보임, back은 중앙으로 전환 */
-.club-card.flipped .card-front {
-  z-index: 1;
-  /* 왼쪽으로 65%만큼 이동 → 25%만 보이게 */
-  transform: translateX(-65%);
-  opacity: 0.7;
-}
-.club-card.flipped .card-back {
-  z-index: 2;
-  /* 중앙으로 이동 → 완전 보이게 */
-  transform: translateX(0);
-  opacity: 1;
-}
-
-/* 이미지 스타일(둘 다 공통 적용) */
+/* 이미지 꽉 차게! */
 .card-front img,
 .card-back img {
   width: 100%;
   height: 100%;
-  object-fit: cover;      /* 이미지를 카드 전체에 딱 맞게(잘릴 수 있음) */
-  object-position: center;/* 가운데 기준 채우기 */
-  border-radius: 8px;
+  object-fit: cover;      /* 시원하게 채우기 */
+  object-position: center;
+  border-radius: 10px;
   display: block;
 }
 
-/* 카드 하단 텍스트 스타일 */
+/* 아래 텍스트 영역 스타일, margin-top 추가로 아래 배치 */
+.club-card h2, .club-card p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 .club-card h2 {
-  margin-top: 18px;
-  font-size: 1.25em;
+  margin-top: 16px;        /* 이미지와 h2 사이 공간 */
+  font-size: 1.3em;
   font-family: 'Jua', 'Noto Sans KR', sans-serif;
   color: #1693a5;
 }
@@ -299,8 +266,8 @@ main {
   color: #333;
   font-size: 1em;
   font-family: 'Noto Sans KR', sans-serif;
-  min-height: 36px;
 }
+
 
 
 /* ================================
