@@ -209,29 +209,27 @@ main {
   gap: 20px;
   margin-top: 20px;
 }
-
 .club-card {
-  /* 카드 전체의 최소 높이 조정 */
-  min-height: 340px;       /* 전체 카드 높이 키움 */
-  max-height:370px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 8px;
+  min-height: 240px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.10);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 12px 8px 18px 8px;  /* 좌우/하단 패딩 추가 */
+  align-items: stretch;
 }
-
 .card-inner {
   position: relative;
   width: 100%;
-  height: 180px;     /* 원하는 만큼 크게/작게 조절 */
+  height: 160px;
   overflow: hidden;
   border-radius: 10px;
-  margin-bottom: 16px;
-  /* display: block; ← 필요없음 */
+  margin-bottom: 14px;
 }
-
-/* 앞면/뒷면 공통 */
-.card-front,
-.card-back {
+.card-front, .card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -240,18 +238,14 @@ main {
   transition: transform 0.6s, opacity 0.45s;
   display: block;
 }
-
-/* 이미지가 card-inner 전체에 빈틈없이 채워짐 */
-.card-front img,
-.card-back img {
-  width: 100%;           /* 부모(=card-inner) 기준 가로 100% */
-  height: 100%;          /* 부모(=card-inner) 기준 세로 100% */
-  object-fit: cover;     /* 남는 공간 없이 '채움' */
+.card-front img, .card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   object-position: center;
   border-radius: 10px;
   display: block;
 }
-
 
 /* 아래 텍스트 영역 스타일, margin-top 추가로 아래 배치 */
 .club-card h2, .club-card p {
