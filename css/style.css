@@ -213,6 +213,7 @@ main {
 .club-card {
   /* 카드 전체의 최소 높이 조정 */
   min-height: 340px;       /* 전체 카드 높이 키움 */
+  max-height:370px;
   display: flex;
   flex-direction: column;
   padding: 12px 8px 18px 8px;  /* 좌우/하단 패딩 추가 */
@@ -221,8 +222,9 @@ main {
 .card-inner {
   /* 이미지 영역 비율을 충분히 크게 (예: 전체의 55~60%) */
   width: 100%;
-  height: 200px;           /* 기존보다 더 크게(원하는 만큼 조정) */
-  flex-shrink: 0;
+  height: 180px;           /* 기존보다 더 크게(원하는 만큼 조정) */
+  min-height: 120px;
+  max-height: 220px;
   overflow: hidden;
   border-radius: 10px;
   margin-bottom: 18px;     /* 이미지와 텍스트 사이 공간 */
@@ -243,7 +245,11 @@ main {
 .card-front img,
 .card-back img {
   width: 100%;
+  min-width: 80px;         /* 최소 너비 */
+  max-width: 300px;        /* 최대 너비 (카드 폭과 비슷하게) */
   height: 100%;
+  min-height: 80px;        /* 최소 높이 */
+  max-height: 220px;       /* 최대 높이 (카드 최대 높이와 맞춤) */
   object-fit: cover;      /* 시원하게 채우기 */
   object-position: center;
   border-radius: 10px;
@@ -385,6 +391,15 @@ footer {
   main {
     padding-top: 114px;
     padding-bottom: 58px;
+  }
+    .card-inner {
+    height: 105px;
+    min-height: 75px;
+    max-height: 130px;
+  }
+  .club-card {
+    min-height: 145px;
+    max-height: 200px;
   }
 }
 
