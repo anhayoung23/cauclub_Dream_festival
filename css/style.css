@@ -227,32 +227,62 @@ main {
   transform: scale(0.97);
 }
 
-/* 이미지와 플립 애니메이션 적용을 위한 래퍼 */
+/* 카드 내부 이미지를 2장 겹치고, transition으로 슬라이드 */
 .card-inner {
+  position: relative;
   width: 100%;
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* 플립 효과 */
-  transition: transform 0.6s cubic-bezier(.7, -0.2, .3, 1.4);
-  transform-style: preserve-3d;
-  perspective: 1000px;
+  height: 92px;
+  overflow: visible;
 }
 
-/* 카드에 flipped 클래스가 붙으면 180도 Y축 회전 */
-.club-card.flipped .card-inner {
-  transform: rotateY(180deg);
-}
-
-/* 이미지(1장만 보임) */
-.card-inner img {
+.card-front,
+.card-back {
+  position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  top: 0; left: 0;
   border-radius: 8px;
-  /* 플립할 때 뒷면이 안 보이게 */
-  backface-visibility: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: 
+    transform 0.6s cubic-bezier(.7, -0.2, .3, 1.4),
+    opacity 0.45s cubic-bezier(.7, -0.2, .3, 1.4);
+}
+
+/* 카드 처음 상태: front는 완전 보임, back은 오른쪽에 25%만 보임(살짝 보이기) */
+.card-front {
+  z-index: 2;
+  transform: translateX(0);
+  opacity: 1;
+}
+.card-back {
+  z-index: 1;
+  /* 오른쪽에서 75% 가려짐, 25%만 보임 */
+  transform: translateX(65%);
+  opacity: 0.7;
+}
+
+/* 카드 클릭(플립) 상태: front는 왼쪽으로 밀려나서 25%만 보임, back은 중앙으로 전환 */
+.club-card.flipped .card-front {
+  z-index: 1;
+  /* 왼쪽으로 65%만큼 이동 → 25%만 보이게 */
+  transform: translateX(-65%);
+  opacity: 0.7;
+}
+.club-card.flipped .card-back {
+  z-index: 2;
+  /* 중앙으로 이동 → 완전 보이게 */
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* 이미지 스타일(둘 다 공통 적용) */
+.card-front img,
+.card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
 }
 
 /* 카드 하단 텍스트 스타일 */
