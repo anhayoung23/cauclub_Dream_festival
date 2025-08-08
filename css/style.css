@@ -124,3 +124,5 @@ body {
     margin-top: 3px;
   }
 }
+
+body { background: yellow !important; }
