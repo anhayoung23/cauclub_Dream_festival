@@ -376,23 +376,29 @@ nav {
   box-shadow: 0 4px 18px rgba(93, 190, 191, 0.13);
   border: 1.5px solid var(--mint);
 }
-.hamburger {
-  display: none;
-  flex-direction: column;
+
+/* ================================
+   ✅ 푸터(더 작게, header보다 작음)
+================================= */
+footer {
+  position: fixed;
+  bottom: 0; left: 0; width: 100%;
+  background: #f7fafc;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  color: #666;
+  font-size: 0.84rem;
+  padding: 4px 0 4px;
+  box-shadow: 0 -2px 8px rgba(67,183,226,0.04);
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 34px;
-  height: 34px;
-  gap: 4px;
-  cursor: pointer;
+  gap: 6px;
+  z-index: 1000;
 }
-.hamburger span {
-  width: 22px;
-  height: 3px;
-  background: var(--mint);
-  border-radius: 2px;
-  transition: all 0.3s;
-  margin: 0;
+.footer-emoji {
+  font-size: 1.0rem;
+  margin-right: 4px;
 }
 
 /* ================================
