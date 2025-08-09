@@ -284,7 +284,7 @@ main {
 .card-back img {
   width: 100%;
   height: 100%;
-  object-fit: cover;      /* 빈틈없이 채우기 */
+  object-fit: contain;      /* 빈틈없이 채우기 */
   object-position: center;
   border-radius: 10px;
   display: block;
