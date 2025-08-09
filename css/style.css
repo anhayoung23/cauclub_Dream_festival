@@ -401,30 +401,32 @@ footer {
   margin-right: 4px;
 }
 
-/* ================================
-   ✅ 반응형(모바일)
-================================= */
-@media (max-width: 768px) {
-  .clubs-grid {
-    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
-    gap: 12px;
+@media (max-width:768px){
+  .clubs-grid{
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); /* 카드 더 크게 */
+    gap:14px; margin-top:24px;
   }
-  .card-inner {
-    height: 95px;
-    margin-bottom: 8px;
+  .card-inner{
+    height:auto; aspect-ratio:3/4; margin-bottom:10px; /* 이미지 3:4 비율 */
   }
-  .club-card {
-    min-height: 148px;
-    padding: 7px 3px 10px 3px;
+  .club-card{padding:10px 6px 14px}
+  .club-card h2{margin-top:6px; font-size:1.06em}
+  .club-card p{font-size:.96em; min-height:18px; margin-top:4px}
+
+  .hamburger{display:flex; width:32px; height:32px} /* 모바일에서 보이게 */
+  .hamburger span{width:20px}
+  .nav-links{
+    position:absolute; top:70px; right:10px; width:200px; display:none;
+    flex-direction:column; align-items:center; padding:12px 0;
+    background:#fff; border:1px solid #e6f1fa; border-radius:12px;
+    box-shadow:0 4px 20px rgba(67,183,226,.11); z-index:1002;
   }
-  .club-card h2 {
-    margin-top: 7px;
-    font-size: 1em;
-  }
-  .club-card p {
-    font-size: 0.92em;
-    min-height: 14px;
-    margin-top: 3px;
+  .nav-links.show{display:flex; animation:slideDown .25s ease}
+  .nav-links li{width:100%; text-align:center}
+  .nav-links a{margin:4px 10px; padding:10px 14px; border-radius:14px}
+
+  @keyframes slideDown{
+    from{opacity:0; transform:translateY(-10px)}
+    to  {opacity:1; transform:translateY(0)}
   }
 }
-
