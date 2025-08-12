@@ -425,14 +425,14 @@ footer {
      min-height: 18px; 
      margin-top: 4px
   }
-  .club-front img,
+  /*.club-front img,
   .card-back img {
     width: 100%;
     height: 100%;
     object-fit: cover; /* 빈틈 없이 채우기 */
-    object-position: center;
+    /*object-position: center;
     border-radius: 10px;
-  }
+  }*/
 
   .hamburger{display:flex; width:32px; height:32px} /* 모바일에서 보이게 */
   .hamburger span{width:20px}
