@@ -404,18 +404,19 @@ footer {
 
 @media (max-width:768px){
   .clubs-block{
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); /* 카드 더 크게 */
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); /* 카드 더 크게 */
     gap:14px; 
-    margin-top:24px;
+    margin-top:24px auto;
 
     /* ✅ 양쪽 여백 추가 */
     padding: 0 12px; /* 왼쪽·오른쪽 12px */
     box-sizing: border-box; /* padding 포함해서 폭 계산 */
+    max-width: calc(100% - 24px); /* 전체 폭에서 좌우 12px 여백 확보 */
   }
   .card-inner{
-    height:auto; 
-    aspect-ratio:3/4; /* 이미지 (가로)3:(세로)4 비율 */
-    margin-bottom:10px; 
+    height: auto; 
+    aspect-ratio: 3/4; /* 이미지 (가로)3:(세로)4 비율 */
+    margin-bottom: 10px; 
   }
   .club-card{
     padding:10px 6px 12px
@@ -438,20 +439,55 @@ footer {
     border-radius: 10px;
   }*/
 
-  .hamburger{display:flex; width:32px; height:32px} /* 모바일에서 보이게 */
-  .hamburger span{width:20px}
-  .nav-links{
-    position:absolute; top:70px; right:10px; width:200px; display:none;
-    flex-direction:column; align-items:center; padding:12px 0;
-    background:#fff; border:1px solid #e6f1fa; border-radius:12px;
-    box-shadow:0 4px 20px rgba(67,183,226,.11); z-index:1002;
+  .hamburger{
+     display:flex; 
+     width:32px; 
+     height:32px
+  } /* 모바일에서 보이게 */
+   
+  .hamburger span{
+     width:20px
   }
-  .nav-links.show{display:flex; animation:slideDown .25s ease}
-  .nav-links li{width:100%; text-align:center}
-  .nav-links a{margin:4px 10px; padding:10px 14px; border-radius:14px}
+  .nav-links{
+    position:absolute; 
+    top:70px;
+    right:10px;
+    width:200px;
+    display:none;
+    flex-direction:column; 
+    align-items:center; 
+    padding:12px 0;
+    background:#fff; 
+    border:1px solid #e6f1fa; 
+    border-radius:12px;
+    box-shadow:0 4px 20px rgba(67,183,226,.11); 
+    z-index:1002;
+  }
+   
+  .nav-links.show{
+     display:flex; 
+     animation:slideDown .25s ease
+  }
+   
+  .nav-links li{
+     width:100%; 
+     text-align:center
+  }
+   
+  .nav-links a{
+     margin:4px 10px; 
+     padding:10px 14px; 
+     border-radius:14px
+  }
 
   @keyframes slideDown{
-    from{opacity:0; transform:translateY(-10px)}
-    to  {opacity:1; transform:translateY(0)}
+    from{
+       opacity:0; 
+       transform:translateY(-10px)
+    }
+    to  {
+       opacity:1; 
+       transform:translateY(0)
+    }
   }
 }
