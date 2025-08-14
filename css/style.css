@@ -410,7 +410,7 @@ footer {
   }
   .card-inner{
     height:auto; 
-    aspect-ratio:1/2; /* 이미지 (가로)3:(세로)4 비율 */
+    aspect-ratio:3/4; /* 이미지 (가로)3:(세로)4 비율 */
     margin-bottom:10px; 
   }
   .club-card{
