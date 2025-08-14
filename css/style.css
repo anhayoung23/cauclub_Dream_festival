@@ -407,6 +407,10 @@ footer {
     grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); /* 카드 더 크게 */
     gap:14px; 
     margin-top:24px;
+
+    /* ✅ 양쪽 여백 추가 */
+    padding: 0 12px; /* 왼쪽·오른쪽 12px */
+    box-sizing: border-box; /* padding 포함해서 폭 계산 */
   }
   .card-inner{
     height:auto; 
