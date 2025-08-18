@@ -34,26 +34,80 @@
   </header>
 
   <!-- ✅ 본문: 연합회 소개 -->
-  <main>
-    <section class="about-section">
-      <h1>동아리연합회 소개</h1>
-      <p>
-        중앙대학교 제41대 동아리연합회 Dream은<br>
-        다양한 동아리가 함께 성장하고 소통할 수 있는 환경을 만듭니다.<br>
-        학생 여러분의 창의와 열정을 응원하며,<br>
-        모두가 주인공이 되는 캠퍼스를 위해 항상 노력하겠습니다!
-      </p>
-      <!-- ✅ 필요하면 아래에 슬라이더/대표 사진 등 추가 가능 -->
-      
-      <!--<div class="slider-container" id="slider">
-        <img src="images/main_logo2.png" alt="동아리활동0">
-        <img src="images/Dream01.jpg" alt="동아리활동1">
-        <img src="images/Dream02.jpeg" alt="동아리활동2">
-        <img src="images/Dream03.jpeg" alt="동아리활동3">
-      </div>-->
-    
-    </section>
-  </main>
+<main>
+  <section class="about-section">
+    <!-- 제목 영역 -->
+    <h1 class="about-title">동아리연합회 소개</h1>
+
+    <!-- 리드 문구: 간단 소개 -->
+    <p class="about-lead">
+      중앙대학교 제41대 동아리연합회 <strong>Dream</strong>은
+      다양한 동아리가 함께 성장하고 소통할 수 있는 환경을 만듭니다.
+      학생 여러분의 창의와 열정을 응원하며,
+      모두가 주인공이 되는 캠퍼스를 위해 항상 노력하겠습니다!
+    </p>
+
+    <!-- ✅ 자동 슬라이더: 3장 이미지 -->
+    <div
+      class="slider"
+      id="aboutSlider"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="동아리 활동 사진 슬라이더"
+      aria-live="polite"
+      data-autoplay="true"
+      data-interval="4000"
+    >
+      <!-- 슬라이드 목록 -->
+      <div class="slides">
+        <!-- 각 슬라이드는 figure로 감싸 접근성/설명 강화 -->
+        <figure class="slide is-active" aria-label="1 / 3">
+          <img
+            src="images/Dream01.jpg"
+            alt="동아리 활동 사진 1: 공연 준비 모습"
+            loading="eager"
+            decoding="async"
+          />
+          <figcaption>함께 준비하는 순간</figcaption>
+        </figure>
+
+        <figure class="slide" aria-label="2 / 3">
+          <img
+            src="images/Dream02.jpeg"
+            alt="동아리 활동 사진 2: 부스 운영 중인 학생들"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>부스에서 만나는 열정</figcaption>
+        </figure>
+
+        <figure class="slide" aria-label="3 / 3">
+          <img
+            src="images/Dream03.jpeg"
+            alt="동아리 활동 사진 3: 무대 공연 장면"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>무대 위의 설렘</figcaption>
+        </figure>
+      </div>
+
+      <!-- 좌우 버튼 (접근성/조작용) -->
+      <button class="nav prev" type="button" aria-label="이전 사진 보기" aria-controls="aboutSlider">‹</button>
+      <button class="nav next" type="button" aria-label="다음 사진 보기" aria-controls="aboutSlider">›</button>
+
+      <!-- 인디케이터(점) -->
+      <div class="dots" role="tablist" aria-label="슬라이드 선택">
+        <button class="dot is-active" role="tab" aria-selected="true" aria-label="1번째 슬라이드" data-slide="0"></button>
+        <button class="dot" role="tab" aria-selected="false" aria-label="2번째 슬라이드" data-slide="1"></button>
+        <button class="dot" role="tab" aria-selected="false" aria-label="3번째 슬라이드" data-slide="2"></button>
+      </div>
+
+      <!-- 재생/일시정지 토글 (접근성/제어) -->
+      <button class="toggle" type="button" aria-pressed="false" aria-label="자동 넘김 일시정지">⏸</button>
+    </div>
+  </section>
+</main>
 
   <!-- ✅ 푸터(공통) -->
   <footer>
