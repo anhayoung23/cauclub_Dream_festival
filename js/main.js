@@ -51,13 +51,6 @@ document.querySelectorAll('.club-card').forEach(card => {
 })();
 
 /* ------------------------------------------------------------
-   2) 유틸: 보이는 탭 여부 확인 (백그라운드 시 자동재생 일시정지)
------------------------------------------------------------- */
-const pageVisibility = {
-  isHidden: () => document.hidden
-};
-
-/* ------------------------------------------------------------
    3) 슬라이더 초기화 함수
    - root: 슬라이더 최상위 요소(.slider)
 ------------------------------------------------------------ */
@@ -95,23 +88,7 @@ function createSlider(root){
   const next = () => show(index + 1);
   const prev = () => show(index - 1);
 
-  // 자동재생 시작/중지
-  const start = () => {
-    if(!autoplay || reducedMotion) return;
-    stop(); // 중복 방지
-    timer = setInterval(() => {
-      if(!pageVisibility.isHidden()){
-        next();
-      }
-    }, intervalMs);
-    toggleBtn && toggleBtn.setAttribute('aria-pressed', 'false');
-    toggleBtn && (toggleBtn.textContent = '⏸'); // 일시정지 표시
-  };
-  const stop = () => {
-    if(timer){ clearInterval(timer); timer = null; }
-    toggleBtn && toggleBtn.setAttribute('aria-pressed', 'true');
-    toggleBtn && (toggleBtn.textContent = '▶'); // 재생 표시
-  };
+ 
 
   // 버튼 이벤트
   prevBtn && prevBtn.addEventListener('click', () => { prev(); stop(); });
@@ -135,9 +112,6 @@ function createSlider(root){
     });
   }
 
-  // 호버 시 일시정지(모바일은 hover 없음)
-  root.addEventListener('mouseenter', stop);
-  root.addEventListener('mouseleave', start);
 
   // 터치 스와이프(모바일 제스처)
   let touchStartX = 0, touchEndX = 0;
