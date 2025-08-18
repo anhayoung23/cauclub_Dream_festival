@@ -491,3 +491,189 @@ footer {
     }
   }
 }
+/* -----------------------------------------------------------
+   📌 About(본문) 영역 기본 레이아웃 & 타이포
+   - 모바일 퍼스트로 여백과 글자 크기를 설정합니다.
+----------------------------------------------------------- */
+.about-section{
+  /* 화면 폭 가운데 정렬 + 가독성 있는 최대 폭 */
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+
+  /* 부드러운 카드 느낌의 배경 (아주 옅은 그라디언트) */
+  background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.02));
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+}
+
+.about-title{
+  /* 제목은 가독성 높고 선명하게 */
+  font-family: 'Jua', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.25;
+  margin: 6px 0 16px;
+  letter-spacing: 0.2px;
+  /* 살짝의 포인트(그라디언트 텍스트) */
+  background: linear-gradient(90deg, #333, #555);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.about-lead{
+  font-family: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  font-size: clamp(1rem, 1.9vw, 1.125rem);
+  line-height: 1.8;
+  color: #222;
+  opacity: 0.92;
+  margin: 0 0 18px;
+}
+
+/* 문단 강조를 위한 가느다란 구분선 */
+.about-section::after{
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin: 16px 0 8px;
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent);
+}
+
+/* -----------------------------------------------------------
+   🎞 슬라이더
+   - 가로/세로 비율 고정(aspect-ratio)로 어떤 화면에서도 안정적으로 보이게
+   - 이미지 오버플로우 방지
+----------------------------------------------------------- */
+.slider{
+  position: relative;
+  margin-top: 18px;
+  border-radius: 16px;
+  overflow: hidden;
+  /* 보기 좋은 비율 (16:9). 필요시 4/3, 1/1 등으로 변경 가능 */
+  aspect-ratio: 16 / 9;
+  background: #111; /* 이미지 로드 전 배경 */
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  isolation: isolate; /* 자식들의 혼합 모드/정렬 안전 */
+}
+
+/* 슬라이드 트랙(겹쳐 쌓는 방식) */
+.slider .slides{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 각각의 슬라이드(겹쳐 놓고, 활성 슬라이드만 보이게) */
+.slider .slide{
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.02); /* 살짝 확대해 들어오는 느낌 */
+  transition:
+    opacity 420ms ease,
+    transform 800ms ease;
+  display: grid;
+  place-items: end; /* 캡션을 아래로 */
+}
+
+/* 현재 활성화된 슬라이드 */
+.slider .slide.is-active{
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.slider img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율 유지하며 꽉 채우기 */
+}
+
+/* 캡션: 하단 그라디언트 + 가독성 확보 */
+.slider figcaption{
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 10px 14px 12px;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 64%, rgba(0,0,0,0.65) 100%);
+}
+
+/* 좌우 네비 버튼: 모바일에서도 누르기 쉽게 큰 터치 영역 */
+.slider .nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(36px, 6vw, 44px);
+  height: clamp(36px, 6vw, 44px);
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.16);
+  color: #fff;
+  font-size: clamp(20px, 3.5vw, 24px);
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease;
+  backdrop-filter: blur(2px);
+}
+.slider .nav:hover{ background: rgba(255,255,255,0.26); transform: translateY(-50%) scale(1.03); }
+.slider .nav:active{ transform: translateY(-50%) scale(0.98); }
+
+.slider .nav.prev{ left: 10px; }
+.slider .nav.next{ right: 10px; }
+
+/* 인디케이터(점) */
+.slider .dots{
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+.slider .dot{
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.slider .dot.is-active{ background: #fff; }
+
+/* 자동재생 토글 버튼 (우하단) */
+.slider .toggle{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 3;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+
+/* -----------------------------------------------------------
+   🧩 접근성/환경 설정
+   - 모션 최소화 설정 사용자(prefers-reduced-motion)가 있으면
+     과한 애니메이션/자동재생을 줄입니다.
+----------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce){
+  .slider .slide{
+    transition: none !important;
+  }
+}
