@@ -554,7 +554,7 @@ footer {
   overflow: hidden;
   /* 보기 좋은 비율 (16:9). 필요시 4/3, 1/1 등으로 변경 가능 */
   aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, #fefcea, #f1f1f1);  /* 부드러운 크림톤 → 회색 그라디언트 */
+  background: #fefcea;  /* 부드러운 크림톤 → 회색 그라디언트 */
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   isolation: isolate; /* 자식들의 혼합 모드/정렬 안전 */
