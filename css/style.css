@@ -552,7 +552,7 @@ footer {
   margin-top: 18px;
   border-radius: 10px;
   overflow: hidden;
-  aspect-ratio: 16/12; /*화면 비율*/
+  aspect-ratio: 16/9; /*화면 비율*/
   background: #1f1f1f; 
   /* 부드러운 크림톤 → 회색 그라디언트 */
   user-select: none;
