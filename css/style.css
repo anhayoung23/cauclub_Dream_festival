@@ -553,7 +553,8 @@ footer {
   border-radius: 10px;
   overflow: hidden;
   /* 보기 좋은 비율 (16:9). 필요시 4/3, 1/1 등으로 변경 가능 */
-  aspect-ratio: 16 / 9;
+  width: 3840px;
+  height: 2160px;
   background: #1f1f1f; 
   /* 부드러운 크림톤 → 회색 그라디언트 */
   user-select: none;
