@@ -550,11 +550,11 @@ footer {
 .slider{
   position: relative;
   margin-top: 18px;
-  border-radius: 16px;
+  border-radius: 10px;
   overflow: hidden;
   /* 보기 좋은 비율 (16:9). 필요시 4/3, 1/1 등으로 변경 가능 */
   aspect-ratio: 16 / 9;
-  background: linear-gradient(135deg, #1f1f1f, #f1f1f1); 
+  background: #1f1f1f; 
   /* 부드러운 크림톤 → 회색 그라디언트 */
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -619,7 +619,7 @@ footer {
   border-radius: 50%;
   border: none;
   background: rgba(255,255,255,0.16);
-  color: #fff;
+  color: #f1f1f1;
   font-size: clamp(20px, 3.5vw, 24px);
   line-height: 1;
   display: grid;
@@ -638,14 +638,14 @@ footer {
 .slider .dots{
   position: absolute;
   left: 50%;
-  bottom: 7px;
+  bottom: 6px;
   transform: translateX(-50%);
   display: flex;
   gap: 6px;
   z-index: 3;
 }
 .slider .dot{
-  width: 9px; height: 9px;
+  width: 7px; height: 7px;
   border-radius: 50%;
   background: rgba(255,255,255,0.45);
   border: none;
