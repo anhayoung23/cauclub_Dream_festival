@@ -619,14 +619,14 @@ footer {
   width: clamp(28px, 5vw, 38px);
   height: clamp(28px, 5vw, 38px);
 
-  border-radius: 50%;
+  border-radius: 0;
   border: none;
   display: grid;
   place-items: center;
   cursor: pointer;
 
   /* 🎨 배경: 반투명 (사진 살짝 비치게) */
-  background: rgba(0,0,0,0.28);   /* 어두운 유리 느낌 */
+  background: none;   /* 어두운 유리 느낌 */
   color: #fff;                    /* 아이콘 색상 흰색 */
   font-size: clamp(16px, 3vw, 20px);
   line-height: 1;
