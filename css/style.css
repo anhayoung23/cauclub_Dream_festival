@@ -608,31 +608,60 @@ footer {
     linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 64%, rgba(0,0,0,0.65) 100%);
 }
 
-/* 좌우 네비 버튼: 모바일에서도 누르기 쉽게 큰 터치 영역 */
-.slider .nav{
+/* 좌우 네비 버튼 */
+.slider .nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: clamp(36px, 6vw, 44px);
-  height: clamp(36px, 6vw, 44px);
+  z-index: 10;
+
+  /* 📏 크기: 기본 조금 작게 */
+  width: clamp(28px, 5vw, 38px);
+  height: clamp(28px, 5vw, 38px);
+
   border-radius: 50%;
   border: none;
-  background: rgba(255,255,255,0.16);
-  color: #f1f1f1;
-  font-size: clamp(20px, 3.5vw, 24px);
-  line-height: 1;
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: background 160ms ease, transform 160ms ease;
+
+  /* 🎨 가림 줄이기: 더 투명 + 얇은 테두리 */
+  background: rgba(20,20,20,0.22);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+
+  font-size: clamp(16px, 3vw, 20px); /* 아이콘 크기도 축소 */
+  line-height: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
   backdrop-filter: blur(2px);
+
+  transition: background .18s ease, transform .18s ease;
 }
-.slider .nav:hover{ background: rgba(255,255,255,0.26); transform: translateY(-50%) scale(1.03); }
-.slider .nav:active{ transform: translateY(-50%) scale(0.98); }
 
-.slider .nav.prev{ left: 10px; }
-.slider .nav.next{ right: 10px; }
+/* hover/active */
+.slider .nav:hover {
+  background: rgba(20,20,20,0.34);
+  transform: translateY(-50%) scale(1.05);
+}
+.slider .nav:active {
+  transform: translateY(-50%) scale(0.95);
+}
 
+/* ◀ ▶ 위치: 버튼을 사진에서 살짝 바깥으로 */
+.slider .nav.prev { left: -6px; }  /* 이전 버튼 */
+.slider .nav.next { right: -6px; } /* 다음 버튼 */
+
+/* 📱 모바일에서는 터치성을 위해 살짝 키움 */
+@media (max-width: 768px) {
+  .slider .nav {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .slider .nav.prev { left: 6px; }
+  .slider .nav.next { right: 6px; }
+}
 /* 인디케이터(점) */
 .slider .dots{
   position: absolute;
