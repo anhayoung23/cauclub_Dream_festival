@@ -660,7 +660,7 @@ footer {
 .slider .nav.prev { left: -6px; }
 .slider .nav.next { right: -6px; }
 
-/* ♿ 키보드 포커스: 배경이 없으므로 아이콘에 빛나는 링 느낌 */
+/* 키보드 포커스: 배경이 없으므로 아이콘에 빛나는 링 느낌 */
 .slider .nav:focus-visible {
   outline: none;
   text-shadow:
