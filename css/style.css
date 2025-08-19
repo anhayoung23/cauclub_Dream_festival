@@ -608,48 +608,68 @@ footer {
     linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 64%, rgba(0,0,0,0.65) 100%);
 }
 
-/* 좌우 네비 버튼 */
+/* ================================
+   ▶ 좌우 네비 아이콘만 보이게 (배경 없음)
+   - 큰 터치 영역은 유지(접근성)
+   - hover/active에 배경 생기지 않음
+   - 사진 위에서 가독성 확보를 위해 text-shadow 추가
+================================= */
 .slider .nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
 
-  /* 📏 크기: 기본 조금 작게 */
+  /* 📏 터치 영역(보이지 않지만 클릭/터치 가능 구역) */
   width: clamp(28px, 5vw, 38px);
   height: clamp(28px, 5vw, 38px);
 
-  border-radius: 0;
+  /* 📌 배경·테두리·원형 제거 → 아이콘만 표시 */
+  background: none;
   border: none;
+  border-radius: 0;
+
   display: grid;
   place-items: center;
   cursor: pointer;
 
-  /* 🎨 배경: 반투명 (사진 살짝 비치게) */
-  background: none;   /* 어두운 유리 느낌 */
-  color: #fff;                    /* 아이콘 색상 흰색 */
-  font-size: clamp(16px, 3vw, 20px);
+  /* 🔠 아이콘 스타일 */
+  color: #fff;                           /* 아이콘 색상 */
+  font-size: clamp(16px, 3vw, 20px);     /* 반응형 크기 */
   line-height: 1;
-  backdrop-filter: blur(3px);     /* 살짝 흐림(유리 효과) */
-  -webkit-backdrop-filter: blur(3px);
 
-  transition: background .18s ease, transform .18s ease;
+  /* 🌟 사진 위에서 잘 보이도록 글로우 효과 */
+  text-shadow: 0 0 6px rgba(0,0,0,0.55), 0 0 2px rgba(0,0,0,0.45);
+
+  /* 🎞️ 부드러운 인터랙션 */
+  transition: transform .18s ease, opacity .18s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
-/* hover/active */
+/* ✋ hover/active: 배경 없이 크기/투명도로만 피드백 */
 .slider .nav:hover {
-  background: rgba(20,20,20,0.34);
-  transform: translateY(-50%) scale(1.05);
+  transform: translateY(-50%) scale(1.08);
+  opacity: 0.95;
 }
 .slider .nav:active {
-  transform: translateY(-50%) scale(0.95);
+  transform: translateY(-50%) scale(0.94);
 }
 
-/* ◀ ▶ 위치: 버튼을 사진에서 살짝 바깥으로 */
-.slider .nav.prev { left: -6px; }  /* 이전 버튼 */
-.slider .nav.next { right: -6px; } /* 다음 버튼 */
+/* ◀ ▶ 위치: 사진 가림 최소화를 위해 살짝 바깥쪽 */
+.slider .nav.prev { left: -6px; }
+.slider .nav.next { right: -6px; }
 
-/* 📱 모바일에서는 터치성을 위해 살짝 키움 */
+/* ♿ 키보드 포커스: 배경이 없으므로 아이콘에 빛나는 링 느낌 */
+.slider .nav:focus-visible {
+  outline: none;
+  text-shadow:
+    0 0 8px rgba(255,255,255,0.85),
+    0 0 4px rgba(255,255,255,0.75),
+    0 0 10px rgba(0,0,0,0.5);
+}
+
+/* 📱 모바일: 터치성 보강 + 살짝 안쪽으로 */
 @media (max-width: 768px) {
   .slider .nav {
     width: 40px;
@@ -659,6 +679,7 @@ footer {
   .slider .nav.prev { left: 6px; }
   .slider .nav.next { right: 6px; }
 }
+
 /* 인디케이터(점) */
 .slider .dots{
   position: absolute;
