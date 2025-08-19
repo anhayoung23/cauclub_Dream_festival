@@ -625,16 +625,13 @@ footer {
   place-items: center;
   cursor: pointer;
 
-  /* 🎨 가림 줄이기: 더 투명 + 얇은 테두리 */
-  background: rgba(20,20,20,0.22);
-  border: 1px solid rgba(255,255,255,0.4);
-  color: #fff;
-
-  font-size: clamp(16px, 3vw, 20px); /* 아이콘 크기도 축소 */
+  /* 🎨 배경: 반투명 (사진 살짝 비치게) */
+  background: rgba(0,0,0,0.28);   /* 어두운 유리 느낌 */
+  color: #fff;                    /* 아이콘 색상 흰색 */
+  font-size: clamp(16px, 3vw, 20px);
   line-height: 1;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);     /* 살짝 흐림(유리 효과) */
+  -webkit-backdrop-filter: blur(3px);
 
   transition: background .18s ease, transform .18s ease;
 }
