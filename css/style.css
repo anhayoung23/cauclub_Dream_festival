@@ -522,7 +522,7 @@ footer {
 }
 
 .about-lead {
-  font-size: clamp(1rem, 1.9vw, 1.125rem);
+  font-size: clamp(0.8rem, 1.9vw, 1.125rem);
   line-height: 1.8;
   text-align: center;
   color: #2c3e50; /* 남색톤 (신뢰감) */
@@ -554,7 +554,7 @@ footer {
   overflow: hidden;
   /* 보기 좋은 비율 (16:9). 필요시 4/3, 1/1 등으로 변경 가능 */
   aspect-ratio: 16 / 9;
-  background: #111; /* 이미지 로드 전 배경 */
+  background: #f7f7f7; /* 이미지 로드 전 배경 */
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   isolation: isolate; /* 자식들의 혼합 모드/정렬 안전 */
