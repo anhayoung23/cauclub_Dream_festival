@@ -149,3 +149,115 @@ document.addEventListener('DOMContentLoaded', () => {
   const slider = document.getElementById('aboutSlider');
   if(slider) createSlider(slider);
 });
+
+
+
+/* ============================================================
+   6분할 카드 뒤집기 + 모바일 포커스(모달) 표시 스크립트
+   - 클릭/엔터/스페이스로 토글
+   - 작은 화면에서는 중앙 확대 모드로 뒷면만 보여준다
+   - ESC, 바깥 터치로 닫기
+   ============================================================ */
+
+(function(){
+  // 유틸: 현재가 '좁은 화면(모바일)'인지 간단 판단 (원하면 기준 조정)
+  const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
+
+  // 요소 참조
+  const board = document.querySelector('.festival-board');
+  const overlay = document.getElementById('tileFocus');
+
+  if(!board) return; // 페이지에 보드가 없으면 무시
+
+  // 델리게이션: 보드 내 타일을 클릭/키보드 조작 처리
+  board.addEventListener('click', onTileActivate);
+  board.addEventListener('keydown', (e) => {
+    // Enter(13), Space(32) 또는 키 이름 기준
+    if((e.key === 'Enter' || e.key === ' ') && e.target.closest('.tile')){
+      e.preventDefault();
+      onTileActivate(e);
+    }
+  });
+
+  // 활성화 로직
+  function onTileActivate(e){
+    const tile = e.target.closest('.tile');
+    if(!tile) return;
+
+    // 모바일: 중앙 포커스 모드
+    if(isMobile()){
+      openFocus(tile);
+      return;
+    }
+
+    // 데스크탑: 그 자리에서 flip 토글
+    tile.classList.toggle('is-flipped');
+
+    // 뒷면 이미지 src 동기화 (초기 로딩 지연을 줄이기 위해 필요 시 교체)
+    const backUrl = tile.getAttribute('data-back');
+    const backImg = tile.querySelector('.face.back img');
+    if(backUrl && backImg && !backImg.src.includes(backUrl)){
+      backImg.src = backUrl;
+    }
+  }
+
+  // 포커스 모드 열기(모바일): 선택된 타일의 '뒷면'을 중앙에 크게 표시
+  function openFocus(tile){
+    const label = tile.getAttribute('data-label') || '';
+    const backUrl = tile.getAttribute('data-back') || '';
+    overlay.setAttribute('data-label', label);
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('active');
+
+    // 기존 내용 제거
+    overlay.innerHTML = '';
+
+    // 포커스 카드 DOM을 동적으로 생성(간단 복제)
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const back = document.createElement('div');
+    back.className = 'face back';
+
+    const img = document.createElement('img');
+    img.alt = label + ' 이미지';
+    if(backUrl) img.src = backUrl;
+
+    back.appendChild(img);
+    card.appendChild(back);
+    overlay.appendChild(card);
+
+    // 스크롤 잠금(바디)
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+  }
+
+  // 포커스 모드 닫기
+  function closeFocus(){
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.innerHTML = '';
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+  }
+
+  // 바깥 터치로 닫기 (오버레이 빈 곳 클릭)
+  overlay.addEventListener('click', (e)=>{
+    if(e.target === overlay) closeFocus();
+  });
+
+  // ESC로 닫기
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && overlay.classList.contains('active')){
+      closeFocus();
+    }
+  });
+
+  // 화면 리사이즈 시, 데스크탑으로 전환되면 열려있던 포커스 닫기
+  window.addEventListener('resize', ()=>{
+    if(!isMobile() && overlay.classList.contains('active')){
+      closeFocus();
+    }
+  });
+})();
+
