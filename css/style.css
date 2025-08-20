@@ -905,3 +905,60 @@ footer {
 @media (prefers-reduced-motion: reduce){
   .festival-board .card{ transition: none; }
 }
+
+
+/* -----------------------------------------------------------
+   📌 Clubs(부스 소개) 본문 컨테이너
+   - 모바일 퍼스트: 가운데 정렬, 여백, 카드형 배경
+   - about-section과 톤/타이포를 통일
+----------------------------------------------------------- */
+.page-content{
+  /* ✅ 폭: 모바일에서 너무 넓지 않게, 데스크톱에서도 가독성 유지 */
+  max-width: 980px;
+  margin: 0 auto;                 /* 가운데 정렬 */
+  padding: 24px 16px 40px;        /* 상/좌우/하 여백 */
+
+  /* 🎨 아주 옅은 그라디언트 + 카드 그림자 (about-section과 동일 톤) */
+  background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.02));
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+}
+
+/* -----------------------------------------------------------
+   🏷 제목(H1)과 서브타이틀(H4)
+   - about의 타이포를 참고: Jua + Noto, 그라디언트 텍스트
+   - 모바일에서 중앙 정렬
+----------------------------------------------------------- */
+.page-content > h1{
+  /* Jua로 제목, 필요 시 Noto Sans KR 폴백 */
+  font-family: 'Jua', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);  /* 모바일~데스크톱 반응형 */
+  line-height: 1.25;
+  margin: 6px 0 10px;
+  letter-spacing: 0.2px;
+
+  /* 🎨 포인트: 그라디언트 텍스트(about-title과 톤 동일) */
+  background: linear-gradient(90deg, #333, #555);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-align: center;  /* 모바일 중앙 정렬 */
+}
+
+.page-content > h4{
+  /* 본문 느낌의 보조 설명 */
+  font-family: 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  font-weight: 500;
+  font-size: clamp(0.98rem, 1.9vw, 1.06rem);
+  line-height: 1.7;
+
+  /* 너무 새까맣지 않게 톤다운 */
+  color: #444;
+  opacity: 0.92;
+
+  /* h1과 가까워 보이도록 살짝 간격 좁힘 */
+  margin: 0 0 14px;
+
+  text-align: center;  /* 모바일 중앙 정렬 */
+}
