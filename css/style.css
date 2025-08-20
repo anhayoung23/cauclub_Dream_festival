@@ -747,7 +747,7 @@ footer {
 /* 키보드 네비게이션 접근성: 포커스 링 */
 .festival-board .tile:focus-visible{
   box-shadow: 0 0 0 3px rgba(60,120,255,.55);
-  border-radius: 14px;
+  border-radius: 8px;
 }
 
 /* 실제 뒤집히는 요소(.card)를 카드 안에 배치 */
@@ -755,7 +755,7 @@ footer {
   position: absolute; inset: 0;
   transform-style: preserve-3d;
   transition: transform .5s cubic-bezier(.2,.7,.2,1);
-  border-radius: 14px;
+  border-radius: 8px;
   overflow: hidden; /* 이미지 넘침 방지 */
   background: #f4f4f6;
 }
@@ -790,13 +790,6 @@ footer {
    - background-size: 300% 200%  → 가로 3조각, 세로 2조각
    - 각 조각의 위치는 0/50/100%와 0/50% 조합으로 지정
    =========================== */
-
-/* 합쳐진 앞면 이미지 경로를 한 곳에서 관리 */
-:root{
-  /* 아래 경로를 실제 파일명으로 교체하세요.
-     제공하신 이미지: /images/KakaoTalk_Photo_2025-08-20-13-34-30.png */
-  --sprite-url: url("../images/KakaoTalk_Photo_2025-08-20-13-34-30.png");
-}
 
 .sprite{
   background-image: var(--sprite-url);
