@@ -720,7 +720,9 @@ footer {
 
 
 /* ===========================
-   6분할 그리드 기본 레이아웃
+   6분할 그리드 (모바일 퍼스트로 수정)
+   - 기본 2열, 아주 작은 화면은 1열, 태블릿 이상 3열
+   - 인스타 4:5 비율 고정
    =========================== */
 
 .festival-board{
@@ -730,24 +732,43 @@ footer {
   padding: 0 12px;              /* 좌우 여백 */
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3열 */
-  grid-auto-rows: 1fr;                     /* 동일 비율 행 */
-  gap: 10px;                               /* 카드 사이 간격 */
-  perspective: 1000px;                     /* 3D 뒤집기 원근감 */
+
+  /* ❗ 기존: 3열 → 모바일 가독성을 위해 2열로 변경 */
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 10px;                    /* 카드 사이 간격 */
+  perspective: 1000px;          /* 3D 뒤집기 원근감 */
 }
 
-/* 반응형: 화면이 좁아도 비율 유지되게 카드 높이 강제 */
+/* 아주 작은 화면(예: ≤360px)에서는 1열 */
+@media (max-width: 360px){
+  .festival-board{
+    grid-template-columns: 1fr;
+    gap: 12px; /* 한 줄이니 간격을 조금 넓힘 */
+  }
+}
+
+/* 태블릿 이상(≥720px)에서는 3열 */
+@media (min-width: 720px){
+  .festival-board{
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+}
+
+/* 카드 높이: 인스타 4:5로 강제(정사각 → 4:5로 수정) */
 .festival-board .tile{
   position: relative;
-  aspect-ratio: 4/3;   /* 정사각형 카드 */
+  aspect-ratio: 4 / 5;   /* ✅ 인스타 4:5 비율 고정 */
   cursor: pointer;
   outline: none;         /* 키보드 포커스 스타일은 아래에서 */
 }
 
 /* 키보드 네비게이션 접근성: 포커스 링 */
 .festival-board .tile:focus-visible{
+  /* ❗ 라운드 14px → 10px로 줄임 */
   box-shadow: 0 0 0 3px rgba(60,120,255,.55);
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 /* 실제 뒤집히는 요소(.card)를 카드 안에 배치 */
@@ -755,15 +776,20 @@ footer {
   position: absolute; inset: 0;
   transform-style: preserve-3d;
   transition: transform .5s cubic-bezier(.2,.7,.2,1);
+
+  /* ❗ 라운드 14px → 10px로 줄임 */
   border-radius: 10px;
+
   overflow: hidden; /* 이미지 넘침 방지 */
-  background: #f4f4f6;
+  background: #0f1012; /* 로딩 전 카드 배경 톤 다운 */
+  box-shadow: 0 8px 20px rgba(0,0,0,.16); /* 은은한 그림자 */
 }
 
 /* 앞/뒷면 공통 */
 .festival-board .face{
   position: absolute; inset: 0;
   backface-visibility: hidden; /* 뒤집을 때 반대면 숨김 */
+  -webkit-backface-visibility: hidden; /* iOS 깜빡임 방지 */
   display: grid; place-items: center;
 }
 
@@ -773,38 +799,37 @@ footer {
   background: #111;       /* 로딩 전 배경 */
 }
 
-/* 뒷면 이미지는 안전한 여백 + 스크롤 가능 */
-.festival-board .face.back img{
+/* 앞/뒷면 이미지 공통: 잘림 없이 전체 보이기 */
+.festival-board .face img{
   width: 100%; height: 100%;
-  object-fit: cover;           /* 필요시 contain 으로 교체 */
+
+  /* ❗ cover → contain 으로 변경: 인스타 비율을 그대로 보존 (잘림 방지) */
+  object-fit: contain;
+
+  background: #000;       /* 레터박스(남는 여백) 색 */
+  border-radius: 10px;    /* 카드와 동일 라운드 */
 }
 
-/* 호버/활성 시 카드 뒤집기 (데스크탑 호버, 모바일은 JS로 .is-flipped 토글) */
+/* 호버/활성 시 카드 뒤집기 (모바일은 JS로 .is-flipped 토글) */
 .festival-board .tile.is-flipped .card{
   transform: rotateY(180deg);
 }
 
 /* ===========================
    스프라이트(앞면) 설정
-   한 장의 큰 이미지(3×2 그리드)를 '배경 위치'로 잘라서 표시
-   - background-size: 300% 200%  → 가로 3조각, 세로 2조각
-   - 각 조각의 위치는 0/50/100%와 0/50% 조합으로 지정
+   - :root 변수 제거 요청 → URL을 직접 지정
+   - 한 장의 큰 이미지(3×2)를 '배경 위치'로 잘라서 표시
    =========================== */
 
-/* 합쳐진 앞면 이미지 경로를 한 곳에서 관리 */
-:root{
-  /* 아래 경로를 실제 파일명으로 교체하세요.
-     제공하신 이미지: /images/KakaoTalk_Photo_2025-08-20-13-34-30.png */
-  --sprite-url: url("../images/KakaoTalk_Photo_2025-08-20-13-34-30.png");
-}
-
 .sprite{
-  background-image: var(--sprite-url);
+  /* ❗ :root --sprite-url 사용 안 함. 직접 경로 지정 */
+  background-image: url("../images/KakaoTalk_Photo_2025-08-20-13-34-30.png");
   background-repeat: no-repeat;
   background-size: 300% 200%;        /* 가로 3, 세로 2 분할 */
-  /* 살짝 라운드/그림자 */
-  border-radius: 9px;
-  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+
+  /* 라운드/그림자 통일 */
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.16);
 }
 
 /* 1행(위쪽) 3칸 */
@@ -819,8 +844,8 @@ footer {
 
 /* ===========================
    포커스(모달) 모드 - 모바일 중심 확대
-   - 작은 화면에서 카드를 화면 중앙에 크게 띄워 가독성 향상
-   - 배경 스크롤 잠금 및 바깥 터치 닫기
+   - 카드 뒷면만 크게 보여줌
+   - 인스타 4:5 비율로 통일
    =========================== */
 
 .tile-focus{
@@ -842,15 +867,21 @@ footer {
 /* 포커스 모드 안의 카드 컨테이너 */
 .tile-focus .card{
   width: min(92vw, 540px);     /* 모바일: 화면 너비 기준 크게 */
-  aspect-ratio: 3 / 4;         /* 세로형 비율(필요시 조정) */
+
+  /* ❗ aspect 3/4 → 4/5로 변경(인스타 비율) */
+  aspect-ratio: 4 / 5;
+
   transform-style: preserve-3d;
   transition: transform .5s cubic-bezier(.2,.7,.2,1);
-  border-radius: 16px;
+
+  /* ❗ 라운드 16px → 10px로 통일 */
+  border-radius: 10px;
+
   overflow: hidden;
   background: #000;
 }
 
-/* 포커스 모드에서는 항상 '뒤집힌 상태(뒷면)'으로 보여주기 */
+/* 포커스 모드에서는 항상 '뒷면'만 보이게 */
 .tile-focus .card,
 .tile-focus .card .face.back{ transform: rotateY(0deg) !important; backface-visibility: visible; }
 .tile-focus .card .face.front{ display: none; }
@@ -868,7 +899,7 @@ footer {
   opacity: .95;
 }
 
-/* 바깥쪽을 탭했을 때 닫히는 안내(하단) */
+/* 바깥쪽을 탭했을 때 닫기 안내(하단) */
 .tile-focus::after{
   content: "바깥쪽을 탭하여 닫기 · ESC로 닫기";
   position: absolute;
@@ -882,26 +913,21 @@ footer {
    반응형 디테일
    =========================== */
 
-/* 태블릿~데스크탑에서 카드 비율 조금 낮춰 시원하게 */
-@media (min-width: 768px){
-  .festival-board{
-    gap: 14px;
-  }
-  .festival-board .tile{
-    aspect-ratio: 4 / 3;  /* 가로형 카드 */
-  }
+/* 태블릿 이상(≥720px)에서는 그리드/모달 크기만 살짝 업 */
+@media (min-width: 720px){
+  .festival-board{ gap: 12px; }
   .tile-focus .card{
     width: min(90vw, 720px);
-    aspect-ratio: 16 / 10; /* 가로형 비율로 전환 */
+    /* 모달도 계속 4:5 유지 */
   }
 }
 
 /* 매우 큰 화면에서 그리드 넓게 */
 @media (min-width: 1100px){
-  .festival-board{ gap: 18px; }
+  .festival-board{ gap: 14px; }
 }
 
-/* 모션 최소화 환경 지원: 뒤집기 대신 페이드 */
+/* 모션 최소화 환경 지원 */
 @media (prefers-reduced-motion: reduce){
   .festival-board .card{ transition: none; }
 }
