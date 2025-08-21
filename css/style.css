@@ -739,7 +739,7 @@ footer {
 /* 반응형: 화면이 좁아도 비율 유지되게 카드 높이 강제 */
 .festival-board .tile{
   position: relative;
-  aspect-ratio: 1 / 1;   /* 정사각형 카드 */
+  aspect-ratio: 4/3;   /* 정사각형 카드 */
   cursor: pointer;
   outline: none;         /* 키보드 포커스 스타일은 아래에서 */
 }
@@ -754,8 +754,8 @@ footer {
 .festival-board .card{
   position: absolute; inset: 0;
   transform-style: preserve-3d;
-  transition: transform .5s cubic-bezier(.2,.7,.2,1);
-  border-radius: 14px;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1);
+  border-radius: 9px;
   overflow: hidden; /* 이미지 넘침 방지 */
   background: #f4f4f6;
 }
@@ -797,7 +797,7 @@ footer {
   background-repeat: no-repeat;
   background-size: 300% 200%;        /* 가로 3, 세로 2 분할 */
   /* 살짝 라운드/그림자 */
-  border-radius: 14px;
+  border-radius: 9px;
   box-shadow: 0 6px 16px rgba(0,0,0,.12);
 }
 
