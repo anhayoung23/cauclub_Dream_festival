@@ -58,74 +58,146 @@
       <section class="festival-board" aria-label="축제 카테고리 선택">
         <!-- 각 타일에 role=button & tabindex 로 키보드 접근성 보강 -->
         <!-- 1. 타임테이블 -->
-        <div class="tile" role="button" tabindex="0" aria-label="타임테이블 보기">
+        <div class="tile" 
+             role="button"  
+             tabindex="0" 
+             aria-label="타임테이블 보기"
+             data-label="타임테이블">
           <div class="card">
             <div class="face front">
               <!-- 인스타 4:5 비율 이미지, 잘림 없이 contain -->
-              <img src="images/front_timetable.png" alt="타임테이블 앞면" loading="lazy" />
+              <img src="images/front_timetable.png" 
+                   alt="타임테이블 앞면" 
+                   loading="lazy"
+                   decoding="async"
+                   draggable="false"/>
             </div>
-            <div class="face back" aria-hidden="true">
-              <img src="images/back_timetable.png" alt="타임테이블 상세 안내" loading="lazy" />
+            <div class="face back">
+              <img src="images/back_timetable.png" 
+                   alt="타임테이블 상세 안내" 
+                   loading="eager" 
+                   decoding="async"
+                   draggable="false"/>
             </div>
           </div>
         </div>
 
         <!-- 2. 푸드트럭 -->
-        <div class="tile" role="button" tabindex="0" aria-label="푸드트럭 보기">
+        <div class="tile"
+             role="button"
+             tabindex="0" 
+             aria-label="푸드트럭 보기"
+             data-label="푸드트럭">
           <div class="card">
             <div class="face front">
-              <img src="images/back_foodtruck.png" alt="푸드트럭 앞면" loading="lazy" />
+              <img src="images/back_foodtruck.png"
+                   alt="푸드트럭 앞면" 
+                   loading="lazy"
+                   decoding="async"
+                   draggable="false"/>
             </div>
-            <div class="face back" aria-hidden="true">
-              <img src="images/back_foodtruck.png" alt="푸드트럭 상세 안내" loading="lazy" />
+            <div class="face back">
+              <img src="images/back_foodtruck.png"
+                   alt="푸드트럭 상세 안내"
+                   loading="eager"
+                   decoding="async"
+                   draggable="false"/>
             </div>
           </div>
         </div>
 
         <!-- 3. 부스 배치도 -->
-        <div class="tile" role="button" tabindex="0" aria-label="부스 배치도 보기">
+        <div class="tile"  
+             role="button" 
+             tabindex="0"  
+             aria-label="부스 배치도 보기"
+             data-label="부스 배치도">
           <div class="card">
             <div class="face front">
-              <img src="images/front_boothmap.png" alt="부스 배치도 앞면" loading="lazy" />
+              <img src="images/front_boothmap.png" 
+                   alt="부스 배치도 앞면"   
+                   loading="lazy"
+                   decoding="async"
+                   draggable="false"/>
             </div>
-            <div class="face back" aria-hidden="true">
-              <img src="images/back_boothmap.png" alt="부스 배치도 상세 안내" loading="lazy" />
+            <div class="face back">
+              <img src="images/back_boothmap.png" 
+                   alt="부스 배치도 상세 안내"
+                   loading="eager"
+                   decoding="async"
+                   draggable="false"/>
             </div>
           </div>
         </div>
 
         <!-- 4. 공연 안내 -->
-        <div class="tile" role="button" tabindex="0" aria-label="공연 안내 보기">
+        <div class="tile"
+             role="button" 
+             tabindex="0" 
+             aria-label="공연 안내 보기"
+             data-label="공연 안내">
           <div class="card">
             <div class="face front">
-              <img src="images/front_stage.png" alt="공연 안내 앞면" loading="lazy" />
+              <img src="images/front_stage.png"
+                   alt="공연 안내 앞면"
+                   loading="lazy"
+                   decoding="async"
+                   draggable="false"/>
             </div>
-            <div class="face back" aria-hidden="true">
-              <img src="images/back_stage.png" alt="공연 안내 상세 안내" loading="lazy" />
+            <div class="face back">
+              <img src="images/back_stage.png" 
+                   alt="공연 안내 상세 안내"  
+                   loading="eager"
+                   decoding="async"
+                   draggable="false"/>
             </div>
           </div>
         </div>
 
         <!-- 5. 부채 배부 안내 -->
-        <div class="tile" role="button" tabindex="0" aria-label="부채 배부 안내 보기">
+        <div class="tile" 
+             role="button" 
+             tabindex="0" 
+             aria-label="부채 배부 안내 보기"
+             data-label="부채 배부 안내">
           <div class="card">
             <div class="face front">
-              <img src="images/front_fan.png" alt="부채 배부 앞면" loading="lazy" />
+              <img src="images/front_fan.png" 
+                   alt="부채 배부 앞면" 
+                   loading="lazy"
+                   decoding="async"
+                   draggable="false"/>
             </div>
-            <div class="face back" aria-hidden="true">
-              <img src="images/back_fan.png" alt="부채 배부 상세 안내" loading="lazy" />
+            <div class="face back">
+              <img src="images/back_fan.png"
+                   alt="부채 배부 상세 안내" 
+                   loading="eager"
+                   decoding="async"
+                   draggable="false"/>
             </div>
           </div>
         </div>
 
         <!-- 6. 동아리축제 팜플렛 -->
-        <div class="tile" role="button" tabindex="0" aria-label="동아리축제 팜플렛 보기">
+        <div class="tile"
+             role="button" 
+             tabindex="0" 
+             aria-label="동아리축제 팜플렛 보기"
+             data-label="동아리축제 팜플렛">
           <div class="card">
             <div class="face front">
-              <img src="images/front_pamphlet.png" alt="동아리축제 팜플렛 앞면" loading="lazy" />
+              <img src="images/front_pamphlet.png"
+                   alt="동아리축제 팜플렛 앞면"
+                   loading="lazy"
+                   decoding="async"
+                   draggable="false"/>
             </div>
-            <div class="face back" aria-hidden="true">
-              <img src="images/back_pamphlet.png" alt="동아리축제 팜플렛 상세 안내" loading="lazy" />
+            <div class="face back">
+              <img src="images/back_pamphlet.png"
+                   alt="동아리축제 팜플렛 상세 안내" 
+                   loading="eager"
+                   decoding="async"
+                   draggable="false"/>
             </div>
           </div>
         </div>
