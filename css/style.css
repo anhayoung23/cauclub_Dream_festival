@@ -783,6 +783,7 @@ footer {
 .festival-board .face.back{
   transform: rotateY(180deg);
   background: #1f1f1f;
+  object-fit: contain;
 }
 
 /* ✅ 핵심: 앞/뒤 모든 이미지가 “전체 보이게” */
@@ -864,7 +865,15 @@ footer {
    (예전에 있었던 @media(min-width:768px){ .tile{ aspect-ratio: 4/3 } } 부분은
     반드시 삭제하세요.)
 */
-
+.page-intro{
+   margin: 8px 0 14px;
+}
+.page-title{
+   text-align: center;
+   font-weight: 700;
+   font-size: clamp(20px, 5.6vw, 28px);
+   margin: 6px 0 10px;
+}
 
 /* -----------------------------------------------------------
    📌 Clubs(부스 소개) 본문 컨테이너
