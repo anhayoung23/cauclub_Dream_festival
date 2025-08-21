@@ -720,192 +720,139 @@ footer {
 
 
 /* ===========================
-   6분할 그리드 기본 레이아웃
+   6분할 그리드 (항상 3열 × 2행)
    =========================== */
-
 .festival-board{
-  /* 가운데 정렬 + 최대 폭 제한 (모바일 우선) */
   width: min(100%, 980px);
   margin: 16px auto;
-  padding: 0 5px;              /* 좌우 여백 */
+  padding: 0 5px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3열 */
-  grid-auto-rows: 1fr;                     /* 동일 비율 행 */
-  gap: 5px;                               /* 카드 사이 간격 */
-  perspective: 1000px;                     /* 3D 뒤집기 원근감 */
+  grid-template-columns: repeat(3, 1fr); /* ✅ 모든 화면에서 3열 고정 */
+  grid-auto-rows: 1fr;
+  gap: 5px;
+  perspective: 1000px;                   /* 3D 원근감 */
 }
 
-/* 반응형: 화면이 좁아도 비율 유지되게 카드 높이 강제 */
+/* 각 카드: 가로3 : 세로4 비율 고정 */
 .festival-board .tile{
   position: relative;
-  aspect-ratio: 3/4;   /* 가로3 : 세로4 */
+  aspect-ratio: 3 / 4;                   /* ✅ 항상 3:4 */
   cursor: pointer;
-  outline: none;         /* 키보드 포커스 스타일은 아래에서 */
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* 키보드 네비게이션 접근성: 포커스 링 */
-/*.festival-board .tile:focus-visible{
-  box-shadow: 0 0 0 3px rgba(60,120,255,.55);
-  border-radius: 14px;
-}*/
-
-/* 실제 뒤집히는 요소(.card)를 카드 안에 배치 */
+/* 뒤집히는 카드 본체 */
 .festival-board .card{
   position: absolute; inset: 0;
   transform-style: preserve-3d;
   transition: transform .4s cubic-bezier(.2,.7,.2,1);
   border-radius: 9px;
-  overflow: hidden; /* 이미지 넘침 방지 */
+  overflow: hidden;
   background: #0f1012;
-  box-shadow: 0 8px 20px rgba(0,0,0,.16)
+  box-shadow: 0 8px 20px rgba(0,0,0,.16);
+
+  /* ✅ iOS/Safari 렌더링 안정화 */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
-/* 앞/뒷면 공통 */
+/* 앞/뒤 면 공통 레이어 */
 .festival-board .face{
-  position: absolute; 
-  inset: 0;
-  backface-visibility: hidden; /* 뒤집을 때 반대면 숨김 */
-  display: grid; 
-  place-items: center;
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+
+  /* ✅ 뒤집을 때 반대면 숨김(벤더 포함) */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* 뒷면은 180도 회전해서 대기 */
+/* 뒷면은 180도 회전 대기 → 카드가 180도 돌면 정면으로 옴 */
 .festival-board .face.back{
   transform: rotateY(180deg);
-  background: #1f1f1f;       /* 로딩 전 배경 */
+  background: #1f1f1f;
 }
 
-/* 뒷면 이미지는 안전한 여백 + 스크롤 가능 */
-.festival-board .face.back img{
-  width: 100%; 
+/* ✅ 핵심: 앞/뒤 모든 이미지가 “전체 보이게” */
+.festival-board .face img{
+  display: block;
+  width: 100%;
   height: 100%;
-  object-fit: contain;           /* 전체가 보이게 */
-  background: #f1f1f1;
-  border-radius: 9px;
+  object-fit: contain;                   /* ✅ 잘림 없이 전체 표시 */
+  background: #000;                      /* 레터박스(여백) 색상 */
+  border-radius: 9px;                    /* 카드와 동일 라운드 */
 }
 
-/* 호버/활성 시 카드 뒤집기 (데스크탑 호버, 모바일은 JS로 .is-flipped 토글) */
+/* 뒤집힘 상태(데스크톱 등 제자리 뒤집기용) */
 .festival-board .tile.is-flipped .card{
   transform: rotateY(180deg);
 }
 
-/* ===========================
-   스프라이트(앞면) 설정
-   한 장의 큰 이미지(3×2 그리드)를 '배경 위치'로 잘라서 표시
-   - background-size: 300% 200%  → 가로 3조각, 세로 2조각
-   - 각 조각의 위치는 0/50/100%와 0/50% 조합으로 지정
-   =========================== */
-
-
+/* ===== (선택) 스프라이트 앞면을 쓰고 있다면 주의 =====
+   background 스프라이트는 'contain'을 적용할 수 없어서
+   전체 보이기 요구와 충돌합니다. 앞면도 <img>로 바꾸세요.
+   .sprite 사용을 계속할 경우, 아래는 유지하되 '전체 보이기'는 불가.
+*/
 .sprite{
-  background-image: var(--sprite-url);
   background-repeat: no-repeat;
-  background-size: 300% 200%;        /* 가로 3, 세로 2 분할 */
-  /* 살짝 라운드/그림자 */
+  background-size: 300% 200%;
   border-radius: 9px;
   box-shadow: 0 6px 16px rgba(0,0,0,.12);
 }
-
-/* 1행(위쪽) 3칸 */
-.sprite-1{ background-position:   0%   0%; }  /* 좌상 */
-.sprite-2{ background-position:  50%   0%; }  /* 중앙상 */
-.sprite-3{ background-position: 100%   0%; }  /* 우상 */
-
-/* 2행(아래쪽) 3칸 */
-.sprite-4{ background-position:   0%  100%; } /* 좌하 */
-.sprite-5{ background-position:  50%  100%; } /* 중앙하 */
-.sprite-6{ background-position: 100%  100%; } /* 우하 */
+.sprite-1{ background-position:   0%   0%; }
+.sprite-2{ background-position:  50%   0%; }
+.sprite-3{ background-position: 100%   0%; }
+.sprite-4{ background-position:   0% 100%; }
+.sprite-5{ background-position:  50% 100%; }
+.sprite-6{ background-position: 100% 100%; }
 
 /* ===========================
-   포커스(모달) 모드 - 모바일 중심 확대
-   - 작은 화면에서 카드를 화면 중앙에 크게 띄워 가독성 향상
-   - 배경 스크롤 잠금 및 바깥 터치 닫기
+   모바일 중앙 확대(모달) – 뒷면만 크게
    =========================== */
-
 .tile-focus{
-  /* 초기에 숨김: JS로 .active 토글 */
   position: fixed; inset: 0;
-  background: rgba(0,0,0,.5);
-  display: none;
+  display: none;                /* JS로 .active 토글 */
+  place-items: center;
+  background: rgba(0,0,0,.55);
   z-index: 1000;
-  padding: 16px;           /* 좌우 여백 */
+  padding: 16px;
   box-sizing: border-box;
 }
+.tile-focus.active{ display: grid; }
 
-/* 포커스 활성화 상태 */
-.tile-focus.active{
-  display: grid;
-  place-items: center;     /* 중앙 정렬 */
-}
-
-/* 포커스 모드 안의 카드 컨테이너 */
 .tile-focus .card{
-  width: min(92vw, 540px);     /* 모바일: 화면 너비 기준 크게 */
-  aspect-ratio: 3 / 4;         /* 세로형 비율(필요시 조정) */
-  transform-style: preserve-3d;
-  transition: transform .5s cubic-bezier(.2,.7,.2,1);
-  border-radius: 16px;
+  width: min(92vw, 560px);
+  aspect-ratio: 3 / 4;          /* ✅ 모달도 3:4 */
+  border-radius: 10px;
   overflow: hidden;
+  background: #000;
+  transform-style: preserve-3d;
+}
+.tile-focus .card .face.front{ display: none; } /* 모달은 뒷면만 */
+.tile-focus .card .face.back{
+  transform: rotateY(0deg) !important;
+  backface-visibility: visible;
+  -webkit-backface-visibility: visible;
+}
+.tile-focus .face img{
+  width: 100%; height: 100%;
+  object-fit: contain;          /* ✅ 전체 보이기 */
   background: #000;
 }
 
-/* 포커스 모드에서는 항상 '뒤집힌 상태(뒷면)'으로 보여주기 */
-.tile-focus .card,
-.tile-focus .card .face.back{ transform: rotateY(0deg) !important; backface-visibility: visible; }
-.tile-focus .card .face.front{ display: none; }
-
-/* 포커스 모드 헤더(라벨) */
-.tile-focus::before{
-  /* 선택된 타일의 data-label을 JS로 세팅해서 접근성 향상 */
-  content: attr(data-label);
-  position: absolute;
-  top: 10px; left: 16px; right: 16px;
-  color: #fff;
-  font: 600 clamp(14px, 3.8vw, 18px)/1.3 'Noto Sans KR', system-ui, -apple-system, sans-serif;
-  letter-spacing: .2px;
-  text-align: center;
-  opacity: .95;
+/* 접근성 & 모션 */
+@media (prefers-reduced-motion: no-preference){
+  .festival-board .tile:active .card{ transform: scale(0.985); }
 }
-
-/* 바깥쪽을 탭했을 때 닫히는 안내(하단) */
-.tile-focus::after{
-  content: "바깥쪽을 탭하여 닫기 · ESC로 닫기";
-  position: absolute;
-  bottom: 12px; left: 0; right: 0;
-  color: #fff; text-align: center;
-  font: 500 clamp(12px, 3.4vw, 14px)/1 'Noto Sans KR', system-ui, -apple-system, sans-serif;
-  opacity: .8;
-}
-
-/* ===========================
-   반응형 디테일
-   =========================== */
-
-/* 태블릿~데스크탑에서 카드 비율 조금 낮춰 시원하게 */
-@media (min-width: 768px){
-  .festival-board{
-    gap: 14px;
-  }
-  .festival-board .tile{
-    aspect-ratio: 4 / 3;  /* 가로형 카드 */
-  }
-  .tile-focus .card{
-    width: min(90vw, 720px);
-    aspect-ratio: 16 / 10; /* 가로형 비율로 전환 */
-  }
-}
-
-/* 매우 큰 화면에서 그리드 넓게 */
-@media (min-width: 1100px){
-  .festival-board{ gap: 18px; }
-}
-
-/* 모션 최소화 환경 지원: 뒤집기 대신 페이드 */
 @media (prefers-reduced-motion: reduce){
   .festival-board .card{ transition: none; }
 }
 
+/* ✅ 중요: 3:4를 덮어쓰던 데스크톱용 aspect-ratio 오버라이드 제거
+   (예전에 있었던 @media(min-width:768px){ .tile{ aspect-ratio: 4/3 } } 부분은
+    반드시 삭제하세요.)
+*/
 
 
 /* -----------------------------------------------------------
