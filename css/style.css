@@ -718,6 +718,17 @@ footer {
   }
 }
 
+/* festival.html */
+.hero-frame{
+   width: min(100%, 520px);
+   margin: 0 auto;
+   overflow: hidden;
+}
+.hero-frame img{
+   width: 100%;
+   height: 100%;
+   object-fit: contain;
+   display: black;
 
 /* ===========================
    6분할 그리드 (항상 3열 × 2행)
