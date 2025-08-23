@@ -747,6 +747,11 @@ footer {
    grid-template-columns: repeat(2, minmax(0,1fr));
    gap: 10px 14px;
 }
+.intro-col--full{ grid-column: 1 / -1; }  /* 설명은 가로 전체 사용 */
+
+.intro-label{ margin: 0 0 4px; font-weight: 700; font-size: clamp(14px, 3.8vw, 16px); }
+.intro-text{  margin: 0; font-size: clamp(13px, 3.6vw, 15px); }
+.intro-desc{  margin: 4px 0 0; color: #6d7179; font-size: clamp(13px, 3.6vw, 15px); line-height: 1.6; }
    
 .festival-board{
   width: min(100%, 980px);
