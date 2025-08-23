@@ -153,131 +153,143 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ============================================================
-   6분할 카드 뒤집기 + 중앙 포커스(모달) 표시 스크립트 (수정본)
-   - 클릭/엔터/스페이스로 '항상' 중앙 확대 모달로 뒷면만 보여준다  ✅
-   - ESC, 바깥 터치로 닫기
-   - 데스크톱에서도 flip 대신 모달을 사용하도록 변경  ✅
+   festival.html 전용 인터랙션 (교체용)
+   - 모바일(<=767px): 카드 탭 → 모달로 뒷면 이미지 중앙 확대
+   - 데스크톱(>767px): 카드 클릭/키보드 → 제자리 뒤집기
+   - ESC/바깥 클릭 → 모달 닫기
+   - data-back 또는 .back img src 사용, 선로딩으로 지연 최소화
+   - .f- 접두사(신규)와 기존 .festival-board/.tile 혼용 커버
    ============================================================ */
 
-(function(){
-  // [원본] 좁은 화면 여부로 모바일 판단
-  // const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
-  // [변경] 더 이상 분기하지 않으므로 isMobile 제거 → 모든 환경에서 모달 사용
+(function initFestival(){
+  document.addEventListener('DOMContentLoaded', () => {
+    const BOARD_SEL = '.f-board, .festival-board';
+    const TILE_SEL  = '.f-tile, .tile';
 
-  // 요소 참조
-  const board = document.querySelector('.festival-board');
-  const overlay = document.getElementById('tileFocus');
+    const board   = document.querySelector(BOARD_SEL);
+    if(!board) return; // 👉 festival 페이지가 아니면 실행 안 함
 
-  if(!board) return; // 페이지에 보드가 없으면 무시
-  if(!overlay){
-    // [추가] 오버레이가 누락되었을 때 개발자가 바로 알 수 있도록 경고
-    console.warn('[tileFocus] 오버레이(#tileFocus)가 문서에 없습니다. body 닫기 전에 추가하세요.');
-    return;
-  }
-
-  // 델리게이션: 보드 내 타일을 클릭/키보드 조작 처리
-  board.addEventListener('click', onTileActivate);
-  board.addEventListener('keydown', (e) => {
-    if((e.key === 'Enter' || e.key === ' ') && e.target.closest('.tile')){
-      e.preventDefault();
-      onTileActivate(e);
+    // 오버레이 탐색: #fFocus → #tileFocus → 없으면 자동 생성
+    let overlay = document.getElementById('fFocus') || document.getElementById('tileFocus');
+    if(!overlay){
+      overlay = document.createElement('div');
+      overlay.id = 'fFocus';
+      overlay.className = 'f-focus tile-focus'; // 둘 다 커버
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(overlay);
     }
+
+    // 클릭/탭(위임)
+    board.addEventListener('click', (e) => {
+      const tile = e.target.closest(TILE_SEL);
+      if(!tile || !board.contains(tile)) return;
+      handleTileActivate(tile, overlay);
+    });
+
+    // 키보드(Enter/Space)
+    board.addEventListener('keydown', (e) => {
+      if((e.key === 'Enter' || e.key === ' ') && e.target.closest(TILE_SEL)){
+        e.preventDefault();
+        const tile = e.target.closest(TILE_SEL);
+        handleTileActivate(tile, overlay);
+      }
+    });
+
+    // 오버레이 닫기 (바깥 클릭/ESC)
+    overlay.addEventListener('click', (e) => {
+      if(e.target === overlay) closeOverlay(overlay);
+    });
+    window.addEventListener('keydown', (e) => {
+      if((e.key === 'Escape') && (overlay.classList.contains('is-active') || overlay.classList.contains('active'))){
+        closeOverlay(overlay);
+      }
+    });
+
+    // 접근성 초기값
+    board.querySelectorAll(TILE_SEL).forEach((tile)=>{
+      tile.setAttribute('aria-pressed', 'false');
+    });
+
+    // 뒷면 이미지 선로딩
+    preloadBackImages(board);
   });
 
-  // 활성화 로직
-  function onTileActivate(e){
-    const tile = e.target.closest('.tile');
-    if(!tile) return;
-
-    // [원본] 모바일이면 openFocus, 아니면 flip 토글
-    // if(isMobile()){
-    //   openFocus(tile);
-    //   return;
-    // }
-    // tile.classList.toggle('is-flipped');
-
-    // [변경] 항상 모달로 중앙 확대(모바일/브라우저 공통)
-    openFocus(tile);
-
-    // [원본] flip용 지연 로딩 보완 로직 (data-back → back <img>.src)
-    // [삭제] 이제 flip을 사용하지 않으므로 불필요
-    // const backUrl = tile.getAttribute('data-back');
-    // const backImg = tile.querySelector('.face.back img');
-    // if(backUrl && backImg && !backImg.src.includes(backUrl)){
-    //   backImg.src = backUrl;
-    // }
+  // 모바일 판별
+  function isSmallScreen(){
+    return window.matchMedia('(max-width: 767px)').matches;
   }
 
-  // 포커스 모드 열기: 선택된 타일의 '뒷면' 이미지를 중앙에 크게 표시
-  function openFocus(tile){
-    // [원본] label/data-back만 참조
-    // const label = tile.getAttribute('data-label') || '';
-    // const backUrl = tile.getAttribute('data-back') || '';
+  // 활성화 분기
+  function handleTileActivate(tile, overlay){
+    if(isSmallScreen()){
+      openOverlayWithBack(tile, overlay);        // 모바일: 모달로 확대
+    }else{
+      const card = tile.querySelector('.f-card, .card');
+      if(card){
+        tile.classList.toggle('is-flipped');     // 데스크톱: flip
+        tile.setAttribute('aria-pressed', tile.classList.contains('is-flipped') ? 'true' : 'false');
+      }else{
+        openOverlayWithBack(tile, overlay);      // 카드 구조 없으면 모달로 대체
+      }
+    }
+  }
 
-    // [변경] label은 data-label → aria-label → '' 순서로 안정적 획득
+  // 모달 열기 (뒷면 이미지)
+  function openOverlayWithBack(tile, overlay){
     const label = tile.getAttribute('data-label') || tile.getAttribute('aria-label') || '';
 
-    // [변경] 이미지 src는 data-back 우선, 없으면 실제 DOM의 .face.back img src를 백업으로 사용
-    const domBackImg = tile.querySelector('.face.back img');
-    const srcFromDom  = domBackImg ? domBackImg.getAttribute('src') : '';
-    const srcFromData = tile.getAttribute('data-back') || '';
-    const backUrl = srcFromData || srcFromDom;
+    // 우선순위: data-back → .f-back/.face.back 내 <img src>
+    const dataBack = tile.getAttribute('data-back') || '';
+    const backImg  = tile.querySelector('.f-back img, .face.back img');
+    const src      = dataBack || (backImg ? backImg.getAttribute('src') : '');
 
+    // 오버레이 표시
+    overlay.innerHTML = '';
     overlay.setAttribute('data-label', label);
     overlay.setAttribute('aria-hidden', 'false');
-    overlay.classList.add('active');
+    overlay.classList.add('is-active');   // f-focus용
+    overlay.classList.add('active');      // tile-focus용
 
-    // 기존 내용 제거
-    overlay.innerHTML = '';
-
-    // 포커스 카드 DOM을 동적으로 생성(뒷면만 표시)
+    // 카드 DOM(모달은 뒷면만)
     const card = document.createElement('div');
-    card.className = 'card';
+    card.className = 'f-card card';
 
     const back = document.createElement('div');
-    back.className = 'face back';
+    back.className = 'f-face f-back face back';
 
     const img = document.createElement('img');
     img.alt = (label ? label + ' ' : '') + '상세 이미지';
-    if(backUrl) img.src = backUrl;            // [변경] data-back 또는 DOM src 중 하나라도 있으면 즉시 표시
+    if(src) img.src = src;
 
     back.appendChild(img);
     card.appendChild(back);
     overlay.appendChild(card);
 
-    // 스크롤 잠금(배경 스크롤 방지)
+    // 배경 스크롤 잠금
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
   }
 
-  // 포커스 모드 닫기
-  function closeFocus(){
-    overlay.classList.remove('active');
+  // 모달 닫기
+  function closeOverlay(overlay){
+    overlay.classList.remove('is-active', 'active');
     overlay.setAttribute('aria-hidden', 'true');
     overlay.innerHTML = '';
     document.documentElement.style.overflow = '';
     document.body.style.overflow = '';
   }
 
-  // 바깥 터치로 닫기 (오버레이 빈 곳 클릭)
-  overlay.addEventListener('click', (e)=>{
-    if(e.target === overlay) closeFocus();
-  });
-
-  // ESC로 닫기
-  window.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape' && overlay.classList.contains('active')){
-      closeFocus();
-    }
-  });
-
-  // [원본] 리사이즈 시 모바일→데스크톱 전환되면 모달 닫기
-  // window.addEventListener('resize', ()=>{
-  //   if(!isMobile() && overlay.classList.contains('active')){
-  //     closeFocus();
-  //   }
-  // });
-
-  // [변경] 모든 환경에서 모달 사용이므로 위 분기 제거(불필요)
+  // back 이미지 선로딩
+  function preloadBackImages(scope){
+    const urls = [...scope.querySelectorAll('.f-back img, .face.back img')]
+      .map(img => img.getAttribute('src'))
+      .filter(Boolean);
+    urls.forEach((url) => {
+      const pic = new Image();
+      pic.decoding = 'async';
+      pic.src = url;
+    });
+  }
 })();
+
 
