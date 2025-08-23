@@ -721,6 +721,7 @@ footer {
 /* festival.html */
 .hero-frame{
    width: min(100%, 520px);
+   aspect-ratio: 4 / 5;       /* 인스타 4:5 */
    margin: 0 auto;
    overflow: hidden;
 }
@@ -728,14 +729,14 @@ footer {
    width: 100%;
    height: 100%;
    object-fit: contain;
-   display: black;
+   display: block;
 
 /* ===========================
    6분할 그리드 (항상 3열 × 2행)
    =========================== */
 /* ✅ 본문/히어로/그리드를 같은 폭으로 맞추는 래퍼 */
 .page-wrap{
-  width: min(100%, 980px);
+  width: min(100%, 980px); /* .festival-board와 동일한 폭*/
   margin: 16px auto;
   padding: 0 12px;
   box-sizing: border-box;
@@ -894,7 +895,10 @@ footer {
    font-size: clamp(20px, 5.6vw, 28px);
    margin: 6px 0 10px;
 }
-
+.page-hero{
+   margin: 8px 0 12px;
+}
+   
 /* -----------------------------------------------------------
    📌 Clubs(부스 소개) 본문 컨테이너
    - 모바일 퍼스트: 가운데 정렬, 여백, 카드형 배경
