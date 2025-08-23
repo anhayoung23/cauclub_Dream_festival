@@ -856,7 +856,7 @@ footer {
 
 .tile-focus .card{
   width: min(92vw, 560px);
-  aspect-ratio: 3 / 4;          /* ✅ 모달도 3:4 */
+  aspect-ratio: 4 / 5;          /* ✅ 모달도 4:5 */
   border-radius: 10px;
   overflow: hidden;
   background: #000;
