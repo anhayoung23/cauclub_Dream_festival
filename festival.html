@@ -55,16 +55,31 @@
       </div>
     </section>
     
-
-    <!-- 본격적인 축제 안내글 -->
-    <section class="festival-board">
+<!-- ✅ 본문과 그리드를 같은 가로선(폭)으로 맞추는 래퍼 -->
+<section class="page-wrap">
+  <!-- ✅ 본격적인 축제 안내글: '소개 전용' 섹션 (그리드 아님) -->
+  <section class="page-intro" aria-label="축제 안내 본문">
       <h1 class="page-title">동아리축제 안내</h1>
-      <p class="page-lead">
-        📅 <h3>일시</h3>: 2025년 9월 10일(수) 10:00 ~ 20:30<br>
-        📍 <h3>장소</h3>: 중앙대학교 다빈치캠퍼스 운동장 사잇길 & 수상무대<br><br>
-        다양한 동아리 부스 체험과 무대 공연, 이벤트가 가득한 축제!<br>
-        중앙대학교 학생이라면 누구나 참여할 수 있습니다.
-      </p>
+       <!-- h3를 p 안에 넣지 말고, 컬럼 블록으로 분리 -->
+    <div class="intro-grid">
+      <div class="intro-col">
+        <h3 class="intro-label">일시</h3>
+        <p class="intro-text">2025년 9월 10일(수) 10:00 ~ 20:30</p>
+      </div>
+
+      <div class="intro-col">
+        <h3 class="intro-label">장소</h3>
+        <p class="intro-text">중앙대학교 다빈치캠퍼스 운동장 사잇길 & 수상무대</p>
+      </div>
+
+      <div class="intro-col intro-col--full">
+        <p class="intro-desc">
+          다양한 동아리 부스 체험과 무대 공연, 이벤트가 가득한 축제!<br>
+          중앙대학교 학생이라면 누구나 참여할 수 있습니다.
+        </p>
+      </div>
+    </div>
+  </section>
 
       <!-- ✅ 카테고리 6분할 카드 (모바일 퍼스트: 기본 2열, 초소형 1열) -->
       <section class="festival-board" aria-label="축제 카테고리 선택">
@@ -214,7 +229,7 @@
           </div>
         </div>
       </section>
-    </section>
+</section>
   </main>
 
   <!-- ✅ 하단 안전영역 패딩 -->
