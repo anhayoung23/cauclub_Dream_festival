@@ -2,248 +2,145 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <!-- ✅ 모바일 뷰포트: 확대/축소 기본값 방지 & iOS 안전영역 대응 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 📱 모바일 전용: 핀치줌 축소/확대 차단 (원하면 user-scalable=no 제거 가능) -->
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>축제 안내 | 2025 동아리축제</title>
 
-  <!-- ✅ Google Fonts -->
+  <!-- 폰트 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Moirai+One&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
 
-  <!-- ✅ CSS 연결 -->
+  <!-- festival 전용 CSS (전역 style.css와 충돌 피하려고 f- 접두사로만 스타일링) -->
+  <link rel="stylesheet" href="css/festival.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-  <!-- ✅ iOS 안전영역 상단 패딩 (노치) -->
-  <div class="safe-top"></div>
-
-  <!-- ✅ 헤더(모바일 최적화) -->
-  <header class="site-header">
-    <nav class="site-nav">
-      <a href="index.html" class="logo-container" aria-label="동아리축제 홈으로">
-        <img src="images/main_logo2.png" alt="축제 로고" class="main-logo" />
-        <span class="logo-text">동아리축제</span>
+<body class="f-page">
+  <!-- 🔝 헤더(필요 최소만) -->
+  <header class="f-header" role="banner">
+    <nav class="f-nav" aria-label="상단 내비게이션">
+      <a href="index.html" class="f-logo" aria-label="동아리축제 홈으로">
+        <img src="images/main_logo2.png" alt="축제 로고" class="f-logo__img" />
+        <span class="f-logo__text">동아리축제</span>
       </a>
-
-      <!-- 햄버거는 필요 시 사용. (여기선 최소 마크업만 유지) -->
-      <button class="hamburger" id="hamburger" aria-label="메뉴 열기/닫기" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </nav>
-
-    <!-- 간단한 탭형 네비 (모바일) -->
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">홈</a></li>
-      <li><a href="about.html">연합회 소개</a></li>
-      <li><a href="clubs.html">부스 소개</a></li>
-      <li><a href="festival.html" class="active">축제 안내</a></li>
-    </ul>
   </header>
 
-  <!-- ✅ 본문: 축제 안내 -->
-  <main class="page-main">
-    <!-- ✅ 히어로 이미지(본문 위) -->
-    <section class="page-hero" aria-label="행사 히어로 이미지">
-      <div class="hero-frame">
-        <img src="images/main_character.png" 
-             alt="2025 동아리축제 캐릭터" 
-             loading="eager"
-             decoding="async">
+  <main class="f-main" id="main">
+    <!-- 🌟 히어로 (원하면 삭제 가능) -->
+    <section class="f-hero" aria-label="행사 소개 이미지">
+      <div class="f-hero__frame">
+        <!-- 4:5 비율 프레임 안에서 전체 보이도록 contain -->
+        <img src="images/main_character.png" alt="2025 동아리축제 캐릭터" loading="eager" decoding="async">
       </div>
     </section>
-    
-<!-- ✅ 본문과 그리드를 같은 가로선(폭)으로 맞추는 래퍼 -->
-<section class="page-wrap">
-  <!-- ✅ 본격적인 축제 안내글: '소개 전용' 섹션 (그리드 아님) -->
-  <section class="page-intro" aria-label="축제 안내 본문">
-      <h1 class="page-title">동아리축제 안내</h1>
-       <!-- h3를 p 안에 넣지 말고, 컬럼 블록으로 분리 -->
-    <div class="intro-grid">
-      <div class="intro-col">
-        <h3 class="intro-label">일시</h3>
-        <p class="intro-text">2025년 9월 10일(수) 10:00 ~ 20:30</p>
+
+    <!-- 📝 본문: 중앙 정렬, 간단 소개 -->
+    <section class="f-intro" aria-label="축제 안내 본문">
+      <h1 class="f-title">2025 동아리축제 안내</h1>
+      <div class="f-intro__grid">
+        <div class="f-intro__col">
+          <h3 class="f-label">일시</h3>
+          <p class="f-text">2025년 9월 10일(수) 10:00 ~ 20:30</p>
+        </div>
+        <div class="f-intro__col">
+          <h3 class="f-label">장소</h3>
+          <p class="f-text">중앙대학교 다빈치캠퍼스 운동장 사잇길 & 수상무대</p>
+        </div>
+        <div class="f-intro__col f-intro__col--full">
+          <p class="f-desc">
+            다양한 동아리 부스 체험과 무대 공연, 이벤트가 가득한 축제!<br>
+            중앙대학교 학생이라면 누구나 참여할 수 있습니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🧩 6분할 카드 보드 (항상 3열 × 2행) -->
+    <section class="f-board" aria-label="축제 카테고리 선택">
+      <!-- 1. 타임테이블 -->
+      <div class="f-tile" role="button" tabindex="0" aria-label="타임테이블" data-label="타임테이블">
+        <div class="f-card">
+          <div class="f-face f-front">
+            <img src="images/front_timetable.png" alt="타임테이블 앞면" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="f-face f-back">
+            <img src="images/back_timetable.png" alt="타임테이블 상세 안내" loading="eager" decoding="async" draggable="false">
+          </div>
+        </div>
       </div>
 
-      <div class="intro-col">
-        <h3 class="intro-label">장소</h3>
-        <p class="intro-text">중앙대학교 다빈치캠퍼스 운동장 사잇길 & 수상무대</p>
+      <!-- 2. 푸드트럭 -->
+      <div class="f-tile" role="button" tabindex="0" aria-label="푸드트럭" data-label="푸드트럭">
+        <div class="f-card">
+          <div class="f-face f-front">
+            <img src="images/front_foodtruck.png" alt="푸드트럭 앞면" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="f-face f-back">
+            <img src="images/back_foodtruck.png" alt="푸드트럭 상세 안내" loading="eager" decoding="async" draggable="false">
+          </div>
+        </div>
       </div>
 
-      <div class="intro-col intro-col--full">
-        <p class="intro-desc">
-          다양한 동아리 부스 체험과 무대 공연, 이벤트가 가득한 축제!<br>
-          중앙대학교 학생이라면 누구나 참여할 수 있습니다.
-        </p>
+      <!-- 3. 부스 배치도 -->
+      <div class="f-tile" role="button" tabindex="0" aria-label="부스 배치도" data-label="부스 배치도">
+        <div class="f-card">
+          <div class="f-face f-front">
+            <img src="images/front_boothmap.png" alt="부스 배치도 앞면" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="f-face f-back">
+            <img src="images/back_boothmap.png" alt="부스 배치도 상세 안내" loading="eager" decoding="async" draggable="false">
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
 
-      <!-- ✅ 카테고리 6분할 카드 (모바일 퍼스트: 기본 2열, 초소형 1열) -->
-      <section class="festival-board" aria-label="축제 카테고리 선택">
-        <!-- 각 타일에 role=button & tabindex 로 키보드 접근성 보강 -->
-        <!-- 1. 타임테이블 -->
-        <div class="tile" 
-             role="button"  
-             tabindex="0" 
-             aria-label="타임테이블 보기"
-             data-label="타임테이블">
-          <div class="card">
-            <div class="face front">
-              <!-- 인스타 4:5 비율 이미지, 잘림 없이 contain -->
-              <img src="images/front_timetable.png" 
-                   alt="타임테이블 앞면" 
-                   loading="lazy"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
-            <div class="face back">
-              <img src="images/back_timetable.png" 
-                   alt="타임테이블 상세 안내" 
-                   loading="eager" 
-                   decoding="async"
-                   draggable="false"/>
-            </div>
+      <!-- 4. 공연 안내 -->
+      <div class="f-tile" role="button" tabindex="0" aria-label="공연 안내" data-label="공연 안내">
+        <div class="f-card">
+          <div class="f-face f-front">
+            <img src="images/front_stage.png" alt="공연 안내 앞면" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="f-face f-back">
+            <img src="images/back_stage.png" alt="공연 안내 상세 안내" loading="eager" decoding="async" draggable="false">
           </div>
         </div>
+      </div>
 
-        <!-- 2. 푸드트럭 -->
-        <div class="tile"
-             role="button"
-             tabindex="0" 
-             aria-label="푸드트럭 보기"
-             data-label="푸드트럭">
-          <div class="card">
-            <div class="face front">
-              <img src="images/front_foodtruck.png"
-                   alt="푸드트럭 앞면" 
-                   loading="lazy"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
-            <div class="face back">
-              <img src="images/back_foodtruck.png"
-                   alt="푸드트럭 상세 안내"
-                   loading="eager"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
+      <!-- 5. 부채 배부 안내 -->
+      <div class="f-tile" role="button" tabindex="0" aria-label="부채 배부 안내" data-label="부채 배부 안내">
+        <div class="f-card">
+          <div class="f-face f-front">
+            <img src="images/front_fan.png" alt="부채 배부 앞면" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="f-face f-back">
+            <img src="images/back_fan.png" alt="부채 배부 상세 안내" loading="eager" decoding="async" draggable="false">
           </div>
         </div>
+      </div>
 
-        <!-- 3. 부스 배치도 -->
-        <div class="tile"  
-             role="button" 
-             tabindex="0"  
-             aria-label="부스 배치도 보기"
-             data-label="부스 배치도">
-          <div class="card">
-            <div class="face front">
-              <img src="images/front_boothmap.png" 
-                   alt="부스 배치도 앞면"   
-                   loading="lazy"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
-            <div class="face back">
-              <img src="images/back_boothmap.png" 
-                   alt="부스 배치도 상세 안내"
-                   loading="eager"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
+      <!-- 6. 동아리축제 팜플렛 -->
+      <div class="f-tile" role="button" tabindex="0" aria-label="동아리축제 팜플렛" data-label="동아리축제 팜플렛">
+        <div class="f-card">
+          <div class="f-face f-front">
+            <img src="images/front_pamphlet.png" alt="동아리축제 팜플렛 앞면" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="f-face f-back">
+            <img src="images/back_pamphlet.png" alt="동아리축제 팜플렛 상세 안내" loading="eager" decoding="async" draggable="false">
           </div>
         </div>
-
-        <!-- 4. 공연 안내 -->
-        <div class="tile"
-             role="button" 
-             tabindex="0" 
-             aria-label="공연 안내 보기"
-             data-label="공연 안내">
-          <div class="card">
-            <div class="face front">
-              <img src="images/front_stage.png"
-                   alt="공연 안내 앞면"
-                   loading="lazy"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
-            <div class="face back">
-              <img src="images/back_stage.png" 
-                   alt="공연 안내 상세 안내"  
-                   loading="eager"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. 부채 배부 안내 -->
-        <div class="tile" 
-             role="button" 
-             tabindex="0" 
-             aria-label="부채 배부 안내 보기"
-             data-label="부채 배부 안내">
-          <div class="card">
-            <div class="face front">
-              <img src="images/front_fan.png" 
-                   alt="부채 배부 앞면" 
-                   loading="lazy"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
-            <div class="face back">
-              <img src="images/back_fan.png"
-                   alt="부채 배부 상세 안내" 
-                   loading="eager"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. 동아리축제 팜플렛 -->
-        <div class="tile"
-             role="button" 
-             tabindex="0" 
-             aria-label="동아리축제 팜플렛 보기"
-             data-label="동아리축제 팜플렛">
-          <div class="card">
-            <div class="face front">
-              <img src="images/front_pamphlet.png"
-                   alt="동아리축제 팜플렛 앞면"
-                   loading="lazy"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
-            <div class="face back">
-              <img src="images/back_pamphlet.png"
-                   alt="동아리축제 팜플렛 상세 안내" 
-                   loading="eager"
-                   decoding="async"
-                   draggable="false"/>
-            </div>
-          </div>
-        </div>
-      </section>
-</section>
+      </div>
+    </section>
   </main>
 
-  <!-- ✅ 하단 안전영역 패딩 -->
-  <div class="safe-bottom"></div>
-  
-  <!-- ✅ 중앙 확대용 오버레이 -->
-  <div class="tile-focus" id="tileFocus" aria-hidden="true"></div>
-  
-  <!-- ✅ 푸터(모바일 간결) -->
-  <footer class="site-footer">
+  <!-- 🔍 중앙 확대(모달) 오버레이 — 모바일 전용 우선, 데스크톱도 사용 가능 -->
+  <div class="f-focus" id="fFocus" aria-hidden="true"></div>
+
+  <footer class="footer">
     <small>&copy; 중앙대학교 제41대 동아리연합회 Dream · 모두에게 열린 축제!</small>
   </footer>
 
-  <!-- ✅ JS 연결 -->
+  <!-- festival 전용 효과 스크립트 -->
   <script src="js/main.js"></script>
 </body>
 </html>
