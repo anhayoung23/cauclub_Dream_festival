@@ -766,10 +766,10 @@ footer {
   perspective: 1000px;                   /* 3D 원근감 */
 }
 
-/* 각 카드: 가로3 : 세로4 비율 고정 */
+/* 각 카드: 가로4 : 세로5 비율 고정 */
 .festival-board .tile{
   position: relative;
-  aspect-ratio: 3 / 4;                   /* ✅ 항상 3:4 */
+  aspect-ratio: 4 / 5;                   /* ✅ 항상 3:4 */
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
