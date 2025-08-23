@@ -731,143 +731,148 @@ footer {
    object-fit: contain;
    display: block;
 }
-/* ===========================
-   6분할 그리드 (항상 3열 × 2행)
-   =========================== */
-/* ✅ 본문/히어로/그리드를 같은 폭으로 맞추는 래퍼 */
-.page-wrap{
-  width: min(100%, 980px); /* .festival-board와 동일한 폭*/
-  margin: 16px auto;
+/* ===========================================================
+   🎉 FESTIVAL PAGE 전용 스타일 (festival.html 전용)
+   - f-main, f-hero, f-intro, f-board, f-focus 등
+   - 다른 페이지와 충돌 방지를 위해 f- 접두사만 사용
+   =========================================================== */
+
+/* 본문 전체: 고정 header/footer와 겹치지 않게 상하 패딩 */
+.f-main{
+  padding: 90px 0 70px; /* header, footer 높이 고려 */
+}
+
+/* 히어로 (본문 위 포스터) */
+.f-hero{ margin: 12px auto 10px; text-align:center; }
+.f-hero__frame{
+  width: min(100%, 520px);
+  aspect-ratio: 4 / 5;        /* 인스타 4:5 */
+  margin: 0 auto;
+  overflow: hidden;
+}
+.f-hero__frame img{
+  width: 100%; height: 100%;
+  object-fit: contain;        /* 전체 보이게 */
+  display: block;
+}
+
+/* 안내글(텍스트) */
+.f-intro{
+  margin: 12px auto 6px;
+  max-width: 980px;
   padding: 0 12px;
-  box-sizing: border-box;
 }
-
-/* festival.html 본문 부분 */
-.intro-grid{
-   display: grid;
-   grid-template-columns: repeat(2, minmax(0,1fr));
-   gap: 10px 14px;
+.f-title{
+  text-align:center;
+  font-family: 'Jua','Noto Sans KR',sans-serif;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  margin: 6px 0 14px;
 }
-.intro-col--full{ grid-column: 1 / -1; }  /* 설명은 가로 전체 사용 */
-
-.intro-label{ margin: 0 0 4px; font-weight: 700; font-size: clamp(14px, 3.8vw, 16px); }
-.intro-text{  margin: 0; font-size: clamp(13px, 3.6vw, 15px); }
-.intro-desc{  margin: 4px 0 0; color: #6d7179; font-size: clamp(13px, 3.6vw, 15px); line-height: 1.6; }
-   
-.festival-board{
-  width: min(100%, 980px);
-  margin: 16px auto;
-  padding: 0 5px;
-  box-sizing: border-box;
+.f-intro__grid{
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* ✅ 모든 화면에서 3열 고정 */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 14px;
+}
+.f-intro__col--full{ grid-column: 1 / -1; }
+.f-label{ margin: 0 0 4px; font-weight:700; font-size: 1rem; }
+.f-text{  margin: 0; font-size: .95rem; }
+.f-desc{  margin: 6px 0 0; font-size: .95rem; color:#555; line-height:1.6; text-align:center; }
+
+/* 6분할 카드 보드: 항상 3열 × 2행, 각 카드 4:5 비율 */
+.f-board{
+  width: min(100%, 980px);
+  margin: 14px auto 0;
+  padding: 0 6px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 모바일/브라우저 공통 3열 고정 */
   grid-auto-rows: 1fr;
-  gap: 5px;
-  perspective: 1000px;                   /* 3D 원근감 */
+  gap: 6px;
+  perspective: 1000px;
 }
-
-/* 각 카드: 가로4 : 세로5 비율 고정 */
-.festival-board .tile{
+.f-tile{
   position: relative;
-  aspect-ratio: 4 / 5;                   /* ✅ 항상 3:4 */
+  aspect-ratio: 4 / 5;        /* 요청 비율 고정 */
   cursor: pointer;
-  outline: none;
   -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+.f-tile:focus-visible{
+  box-shadow: 0 0 0 3px rgba(71,162,210,.45);
+  border-radius: 8px;
 }
 
-/* 뒤집히는 카드 본체 */
-.festival-board .card{
+/* 실제 뒤집히는 카드 본체 */
+.f-card{
   position: absolute; inset: 0;
   transform-style: preserve-3d;
-  transition: transform .4s cubic-bezier(.2,.7,.2,1);
-  border-radius: 9px;
+  transition: transform .38s cubic-bezier(.2,.7,.2,1);
   overflow: hidden;
-  background: #0f1012;
-  box-shadow: 0 8px 20px rgba(0,0,0,.16);
+  background: #0f1012;        /* 로딩 중 백업 배경 */
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
 
-  /* ✅ iOS/Safari 렌더링 안정화 */
+  /* iOS 사파리 렌더 안정화 */
   will-change: transform;
   transform: translateZ(0);
 }
 
-/* 앞/뒤 면 공통 레이어 */
-.festival-board .face{
+/* 앞/뒤 면 */
+.f-face{
   position: absolute; inset: 0;
   display: grid; place-items: center;
-
-  /* ✅ 뒤집을 때 반대면 숨김(벤더 포함) */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
-
-/* 뒷면은 180도 회전 대기 → 카드가 180도 돌면 정면으로 옴 */
-.festival-board .face.back{
-  transform: rotateY(180deg);
-  background: #1f1f1f;
-  object-fit: contain;
-}
-
-/* ✅ 핵심: 앞/뒤 모든 이미지가 “전체 보이게” */
-.festival-board .face img{
+.f-face img{
+  width: 100%; height: 100%;
+  object-fit: contain;        /* 이미지 잘림 없이 전체 보이게 */
+  background: #000;           /* 레터박스 색 */
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;                   /* ✅ 잘림 없이 전체 표시 */
-  background: #000;                      /* 레터박스(여백) 색상 */
-  border-radius: 9px;                    /* 카드와 동일 라운드 */
 }
+.f-face.f-back{ transform: rotateY(180deg); }
 
-/* 뒤집힘 상태(데스크톱 등 제자리 뒤집기용) */
-.festival-board .tile.is-flipped .card{
-  transform: rotateY(180deg);
-}
+/* (데스크톱에서) 제자리 뒤집기를 쓰고 싶다면 .is-flipped 사용
+   - 지금 JS는 ‘모달로 확대’만 사용하지만, 보조용으로 보존 */
+.f-tile.is-flipped .f-card{ transform: rotateY(180deg); }
 
-/* ===========================
-   모바일 중앙 확대(모달) – 뒷면만 크게
-   =========================== */
-.tile-focus{
+/* 중앙 확대 모달(타일 탭 시 뒷면을 중앙에 크게 표시) */
+.f-focus{
   position: fixed; inset: 0;
-  display: none;                /* JS로 .active 토글 */
+  display: none;              /* JS가 .active로 토글 */
   place-items: center;
-  background: rgba(0,0,0,.55);
-  z-index: 1000;
-  padding: 16px;
+  background: rgba(0,0,0,.6);
+  z-index: 2000;
+  padding: 20px;
   box-sizing: border-box;
 }
-.tile-focus.active{ display: grid; }
-
-.tile-focus .card{
+.f-focus.active{ display: grid; }
+.f-focus .f-card{
   width: min(92vw, 560px);
-  aspect-ratio: 4 / 5;          /* ✅ 모달도 4:5 */
-  border-radius: 10px;
-  overflow: hidden;
+  aspect-ratio: 4 / 5;        /* 모달에서도 4:5 */
   background: #000;
+  overflow: hidden;
   transform-style: preserve-3d;
 }
-.tile-focus .card .face.front{ display: none; } /* 모달은 뒷면만 */
-.tile-focus .card .face.back{
+.f-focus .f-face.f-front{ display:none; }           /* 모달은 뒷면만 노출 */
+.f-focus .f-face.f-back{
   transform: rotateY(0deg) !important;
   backface-visibility: visible;
   -webkit-backface-visibility: visible;
 }
-.tile-focus .face img{
-  width: 100%; height: 100%;
-  object-fit: contain;          /* ✅ 전체 보이기 */
-  background: #000;
+.f-focus .f-face img{
+  object-fit: contain;        /* 모달에서도 전체 보이게 */
 }
 
-/* 접근성 & 모션 */
+/* 모달 오픈 시 바디 스크롤 잠금 */
+html.f-noScroll, body.f-noScroll{ overflow: hidden !important; }
+
+/* 터치 피드백 살짝 축소(선택) */
 @media (prefers-reduced-motion: no-preference){
-  .festival-board .tile:active .card{ transform: scale(0.985); }
+  .f-tile:active .f-card{ transform: scale(0.985); }
 }
 @media (prefers-reduced-motion: reduce){
-  .festival-board .card{ transition: none; }
+  .f-card{ transition: none; }
 }
 
-/* ✅ 중요: 3:4를 덮어쓰던 데스크톱용 aspect-ratio 오버라이드 제거
-   (예전에 있었던 @media(min-width:768px){ .tile{ aspect-ratio: 4/3 } } 부분은
-    반드시 삭제하세요.)
-*/
 .page-intro{
    margin: 8px 0 14px;
 }
