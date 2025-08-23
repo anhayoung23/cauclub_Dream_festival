@@ -822,24 +822,6 @@ footer {
   transform: rotateY(180deg);
 }
 
-/* ===== (선택) 스프라이트 앞면을 쓰고 있다면 주의 =====
-   background 스프라이트는 'contain'을 적용할 수 없어서
-   전체 보이기 요구와 충돌합니다. 앞면도 <img>로 바꾸세요.
-   .sprite 사용을 계속할 경우, 아래는 유지하되 '전체 보이기'는 불가.
-*/
-.sprite{
-  background-repeat: no-repeat;
-  background-size: 300% 200%;
-  border-radius: 9px;
-  box-shadow: 0 6px 16px rgba(0,0,0,.12);
-}
-.sprite-1{ background-position:   0%   0%; }
-.sprite-2{ background-position:  50%   0%; }
-.sprite-3{ background-position: 100%   0%; }
-.sprite-4{ background-position:   0% 100%; }
-.sprite-5{ background-position:  50% 100%; }
-.sprite-6{ background-position: 100% 100%; }
-
 /* ===========================
    모바일 중앙 확대(모달) – 뒷면만 크게
    =========================== */
