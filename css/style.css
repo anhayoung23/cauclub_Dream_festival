@@ -739,32 +739,33 @@ footer {
 
 /* 본문 전체: 고정 header/footer와 겹치지 않게 상하 패딩 */
 .f-main{
-  padding: 90px 0 74px; /* header, footer 높이 고려 */
+  padding: 92px 0 70px; /* header, footer 높이 고려 */
 }
 
 /* 히어로 (본문 위 포스터) */
 .f-hero{ 
-   margin: 10px auto 8px; 
-   text-align: center; 
+   margin: 10px auto 6px; 
+   display: flex;
+   justify-content: center;
 }
 .f-hero__frame{
-  width: min(80%, 280px);
+  width: min(78%, 280px);
   aspect-ratio: 4 / 5;        /* 인스타 4:5 */
   margin: 0 auto 10px;
   overflow: hidden;
 }
 .f-hero__frame img{
   width: 100%; 
-  height: auto;
+  height: 100%;
   object-fit: contain;        /* 전체 보이게 */
   display: block;
 }
 
 /* 안내글(텍스트) */
 .f-intro{
-  margin: 0px auto 14px;
-  max-width: 720px;
-  padding: 0 12px;
+  margin: 0px auto 16px;
+  max-width: 780px;
+  padding: 0 14px;
   text-align: center;
 }
 .f-title{
@@ -785,26 +786,23 @@ footer {
 
 /* 6분할 카드 보드: 항상 3열 × 2행, 각 카드 4:5 비율 */
 .f-board{
-  /* 타일 너비(칼럼 폭) 변수: 기기폭에 따라 자동으로 크기 조절 */
-  --tileW: clamp(78px, 20vw, 130px);
-  --gap: clamp(4px, 1.6vw, 9px);
-   
-  /* 3열 공정 */
-  display: grid;
-  grid-template-columns: repeat(3, var(--tileW); /* 모바일/브라우저 공통 3열 고정 */
-  /* grid-auto-rows: 1fr; */
-  gap: var(--gap);
-
-  /* 그리드 자체를 가운데로 */
-  justify-content: center;
-
   /* 바깥 컨테이너 */
   width: 100%;
-  max-width: 980px;
+  max-width: 360px;
   margin: 12px auto 0;
   padding: 0 10px;
   perspective: 1000px;
+   
+  /* 3열 공정 */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr; /* 모바일/브라우저 공통 3열 고정 */
+  /* grid-auto-rows: 1fr; */
+  gap: 8px;
+
+  /* 그리드 자체를 가운데로 */
+  justify-content: center;
 }
+
 .f-tile{
   position: relative;
   aspect-ratio: 4 / 5;        /* 요청 비율 고정 */
@@ -820,9 +818,10 @@ footer {
 
 /* 실제 뒤집히는 카드 본체 */
 .f-card{
-  position: absolute; inset: 0;
+  position: absolute; 
+  inset: 0;
   transform-style: preserve-3d;
-  transition: transform .38s cubic-bezier(.2,.7,.2,1);
+  transition: transform .36s cubic-bezier(.2,.7,.2,1);
   overflow: hidden;
   background: #0f1012;        /* 로딩 중 백업 배경 */
   box-shadow: 0 6px 16px rgba(0,0,0,.15);
@@ -899,12 +898,14 @@ html.f-noScroll, body.f-noScroll{ overflow: hidden !important; }
 }
 @media (max-width: 360px){
    .f-board{
-      --tileW: 92px;
-      --gap: 6px;
+      max-width: 330px;
+      gap: 7px;
    }
-@media (min-width: 768px){ .f-intro__grid{ grid-template-columns: repeat(2,1fr); } }
-.f-intro__col--full{ grid-column: 1 / -1; }
-
+   .f-hero__frame{
+      width: 84vw;
+      max-height: clamp(190px, 42vh, 340px);
+   }
+}
 .page-intro{
    margin: 8px 0 14px;
 }
