@@ -900,7 +900,7 @@ html.f-noScroll, body.f-noScroll{ overflow: hidden !important; }
       max-height: clamp(190px, 42vh, 340px);
    }
 }
-.page-intro{
+/* .page-intro{
    margin: 8px 0 14px;
 }
 .page-title{
@@ -911,7 +911,7 @@ html.f-noScroll, body.f-noScroll{ overflow: hidden !important; }
 }
 .page-hero{
    margin: 8px 0 12px;
-}
+} */
    
 /* -----------------------------------------------------------
    📌 Clubs(부스 소개) 본문 컨테이너
