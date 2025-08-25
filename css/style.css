@@ -727,16 +727,20 @@ footer {
 
 /* 본문 전체: 고정 header/footer와 겹치지 않게 상하 패딩 */
 .f-main{
-  padding: 92px 0 70px; /* header, footer 높이 고려 */
+  padding: 78px 0 68px; /* header, footer 높이 고려 */
+  display: block; /* ✅ 세로 흐름으로 쌓이도록 기본 블록 레이아웃으로 강제 */
+  overflow-x: hidden; /* 스크롤 가능 (혹시 상위에서 overflow 숨긴 경우 대비) */
+   
 }
 
-/* 히어로 (본문 위 포스터) */
+/* 히어로 이미지(본문 위 포스터): 크기는 작게, 정렬은 가운데로 */
 .f-hero{ 
-   margin: 20px auto; 
+   margin: 12px auto 10px; 
    text-align: center;
 }
 .f-hero__frame{
-  width: min(84vw, 360px);
+  /* 화면 폭 기준 반응형 + 상한 */
+  width: min(70vw, 320px);
   aspect-ratio: 4 / 5;        /* 인스타 4:5 */
   margin: 0 auto;
   overflow: hidden;
@@ -744,56 +748,63 @@ footer {
 .f-hero__frame img{
   width: 100%; 
   height: 100%;
-  object-fit: contain;        /* 전체 보이게 */
+  object-fit: contain;        /* 이미지 전체 보이게 */
   display: block;
 }
 
-/* 안내글(텍스트) */
+/* 안내글(본문_히어로 아래): 블록 흐름으로 세로 배치, 가운데 정렬 */
 .f-intro{
-  margin: 20px auto;
-  max-width: 480px;
+  margin: 14px auto 14px;
+  max-width: 480px; /* 문단 가독 폭 */ 
   padding: 0 16px;
   text-align: center; /* ✅ 세로로 쌓이게 */
   display: block; /* flex/grid 아님 -> 세로 배치 */
 }
-.f-intro__grid{
+
+/* .f-intro__grid{
   display: block; /* ✅ 한 줄씩 세로 */
-}
+/* } */
 .f-intro__col{ 
-   margin-bottom: 12px; 
+   margin-bottom: 10px; 
 }
+.f-intro__col--full{ 
+   margin-top: 2px; 
+}
+
+.f-label{ margin: 0 0 4px; font-weight: 700; font-size: 1rem; }
+.f-text{  margin: 0; font-size: .98rem; }
+.f-desc{  margin: 6px 0 0; font-size: .98rem; color:#545; line-height: 1.65; }
 
 /* 6분할 카드 보드: 항상 3열 × 2행, 각 카드 4:5 비율 */
 .f-board{
   /* 바깥 컨테이너 */
   width: min(92vw, 420px);
-  margin: 20px auto;
-  padding: 0 10px;
+  margin: 12px auto 0;
+  padding: 0;
   /* perspective: 1000px; */
    
   /* 3열 공정 */
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 모바일/브라우저 공통 3열 고정 */
   /* grid-auto-rows: 1fr; */
-  gap: 10px;
+  gap: 7px;
 
   /* 그리드 자체를 가운데로 */
   justify-content: center;
 }
 
 .f-tile{
-  /* width: 150px; /* 카드 가로 고정 */
+  width: 100% /* 카드 가로 고정 */
   /* max-width: 250px; */
   position: relative;
   aspect-ratio: 4 / 5;        /* 요청 비율 고정 */
-  /* cursor: pointer;
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  outline: none; */
+  outline: none;
 }
 .f-tile:focus-visible{
   box-shadow: 0 0 0 3px rgba(71,162,210,.45);
   border-radius: 8px;
-  min-width: var(--tileW); /* 트랙 폭과 동일하게 */
 }
 
 /* 실제 뒤집히는 카드 본체 */
@@ -801,7 +812,7 @@ footer {
   position: absolute; 
   inset: 0;
   transform-style: preserve-3d;
-  transition: transform .36s cubic-bezier(.2,.7,.2,1);
+  transition: transform .34s cubic-bezier(.2,.7,.2,1);
   overflow: hidden;
   background: #0f1012;        /* 로딩 중 백업 배경 */
   box-shadow: 0 6px 16px rgba(0,0,0,.15);
