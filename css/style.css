@@ -786,7 +786,7 @@ footer {
 /* 6분할 카드 보드: 항상 3열 × 2행, 각 카드 4:5 비율 */
 .f-board{
   /* 타일 너비(칼럼 폭) 변수: 기기폭에 따라 자동으로 크기 조절 */
-  --tileW: clamp(82px, 22vw, 138px);
+  --tileW: clamp(78px, 20vw, 130px);
   --gap: clamp(4px, 1.6vw, 9px);
    
   /* 3열 공정 */
