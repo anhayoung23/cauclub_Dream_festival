@@ -720,9 +720,9 @@ footer {
 
 /* festival.html */
 .hero-frame{
-   width: min(100%, 520px);
+   width: min(100%, 380px);
    aspect-ratio: 4 / 5;       /* 인스타 4:5 */
-   margin: 0 auto;
+   margin: 0 18px;
    overflow: hidden;
 }
 .hero-frame img{
@@ -758,9 +758,10 @@ footer {
 
 /* 안내글(텍스트) */
 .f-intro{
-  margin: 12px auto 6px;
-  max-width: 980px;
+  margin: 0px auto 18px;
+  max-width: 880px;
   padding: 0 12px;
+  text-align: center;
 }
 .f-title{
   text-align:center;
@@ -781,12 +782,12 @@ footer {
 /* 6분할 카드 보드: 항상 3열 × 2행, 각 카드 4:5 비율 */
 .f-board{
   width: min(100%, 980px);
-  margin: 14px auto 0;
-  padding: 0 6px;
+  margin: 10px auto 0;
+  padding: 0 8px;
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 모바일/브라우저 공통 3열 고정 */
   grid-auto-rows: 1fr;
-  gap: 6px;
+  gap: 5px;
   perspective: 1000px;
 }
 .f-tile{
@@ -817,26 +818,34 @@ footer {
 
 /* 앞/뒤 면 */
 .f-face{
-  position: absolute; inset: 0;
-  display: grid; place-items: center;
+  position: absolute; 
+  inset: 0;
+  display: grid; 
+  place-items: center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
 .f-face img{
-  width: 100%; height: 100%;
+  width: 100%; 
+  height: 100%;
   object-fit: contain;        /* 이미지 잘림 없이 전체 보이게 */
   background: #000;           /* 레터박스 색 */
   display: block;
 }
-.f-face.f-back{ transform: rotateY(180deg); }
+.f-face.f-back{ 
+   transform: rotateY(180deg); 
+}
 
 /* (데스크톱에서) 제자리 뒤집기를 쓰고 싶다면 .is-flipped 사용
    - 지금 JS는 ‘모달로 확대’만 사용하지만, 보조용으로 보존 */
-.f-tile.is-flipped .f-card{ transform: rotateY(180deg); }
+.f-tile.is-flipped .f-card{ 
+   transform: rotateY(180deg); 
+}
 
 /* 중앙 확대 모달(타일 탭 시 뒷면을 중앙에 크게 표시) */
 .f-focus{
-  position: fixed; inset: 0;
+  position: fixed; 
+  inset: 0;
   display: none;              /* JS가 .active로 토글 */
   place-items: center;
   background: rgba(0,0,0,.6);
