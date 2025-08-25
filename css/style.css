@@ -9,6 +9,10 @@
   --bule2: #009dbd;
   --orange2: #e8410b;
   --black: #2f2f2f;
+
+  --f-hero-w: 280px;
+  --f-tile-w: 110px;
+  --f-gap: 10px; /* 카드 간격 */
 }
 
 /* ================================
@@ -718,19 +722,6 @@ footer {
   }
 }
 
-/* festival.html */
-.hero-frame{
-   width: min(100%, 380px);
-   aspect-ratio: 4 / 5;       /* 인스타 4:5 */
-   margin: 0 18px;
-   overflow: hidden;
-}
-.hero-frame img{
-   width: 100%;
-   height: 100%;
-   object-fit: contain;
-   display: block;
-}
 /* ===========================================================
    🎉 FESTIVAL PAGE 전용 스타일 (festival.html 전용)
    - f-main, f-hero, f-intro, f-board, f-focus 등
@@ -744,14 +735,13 @@ footer {
 
 /* 히어로 (본문 위 포스터) */
 .f-hero{ 
-   margin: 10px auto 6px; 
-   display: flex;
-   justify-content: center;
+   margin: 12px auto 10px; 
+   text-align-content: center;
 }
 .f-hero__frame{
-  width: min(78%, 280px);
+  width: var(--f-hero-w);
   aspect-ratio: 4 / 5;        /* 인스타 4:5 */
-  margin: 0 auto 10px;
+  margin: 0 auto;
   overflow: hidden;
 }
 .f-hero__frame img{
@@ -763,9 +753,9 @@ footer {
 
 /* 안내글(텍스트) */
 .f-intro{
-  margin: 0px auto 16px;
-  max-width: 780px;
-  padding: 0 14px;
+  margin: 8px auto 16px;
+  max-width: 480px;
+  padding: 0 12px;
   text-align: center;
 }
 .f-title{
@@ -795,7 +785,7 @@ footer {
    
   /* 3열 공정 */
   display: grid;
-  grid-template-columns: repeat(3, auto); /* 모바일/브라우저 공통 3열 고정 */
+  grid-template-columns: repeat(3, var(--f-tile-w)); /* 모바일/브라우저 공통 3열 고정 */
   /* grid-auto-rows: 1fr; */
   gap: 8px;
 
