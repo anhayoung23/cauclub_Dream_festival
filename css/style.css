@@ -775,7 +775,7 @@ footer {
 .f-board{
   /* 바깥 컨테이너 */
   /*width: 100%; */
-  max-width: 720px; /* 전체 최대 폭 */
+  max-width: 540px; /* 전체 최대 폭 */
   margin: 16px auto 0;
   padding: 0 10px;
   /* perspective: 1000px; */
