@@ -787,15 +787,15 @@ footer {
 /* 6분할 카드 보드: 항상 3열 × 2행, 각 카드 4:5 비율 */
 .f-board{
   /* 바깥 컨테이너 */
-  width: 100%;
-  max-width: 360px;
-  margin: 12px auto 0;
-  padding: 0 10px;
+  /*width: 100%;
+  max-width: 360px;*/
+  margin: 12px auto;
+  /*padding: 0 10px;*/
   perspective: 1000px;
    
   /* 3열 공정 */
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 모바일/브라우저 공통 3열 고정 */
+  grid-template-columns: repeat(3, auto); /* 모바일/브라우저 공통 3열 고정 */
   /* grid-auto-rows: 1fr; */
   gap: 8px;
 
@@ -804,6 +804,7 @@ footer {
 }
 
 .f-tile{
+  width: 100px;
   position: relative;
   aspect-ratio: 4 / 5;        /* 요청 비율 고정 */
   cursor: pointer;
