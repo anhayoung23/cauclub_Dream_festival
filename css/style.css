@@ -739,16 +739,21 @@ footer {
    text-align: center;
 }
 .f-hero__frame{
-  /* 화면 폭 기준 반응형 + 상한 */
-  width: min(70vw, 320px);
-  aspect-ratio: 4 / 5;        /* 인스타 4:5 */
-  margin: 0 auto;
-  overflow: hidden;
+  width: 100%;                     /* 기본 100% 폭 */
+  max-width: 480px;                 /* page-content와 유사한 가독성 폭 */
+  margin: 0 auto;                   /* 가운데 정렬 */
+  padding: 0 16px;                  /* 좌우 여백 */
+  box-sizing: border-box;           /* padding 포함 계산 */
+  
+  aspect-ratio: 4 / 5;              /* 캐릭터 이미지는 4:5 비율 */
+  display: flex;                    /* 이미지 정렬을 위해 flex */
+  justify-content: center;          /* 수평 가운데 */
+  align-items: center;              /* 수직 가운데 */
 }
 .f-hero__frame img{
-  width: 100%; 
-  height: 100%;
-  object-fit: contain;        /* 이미지 전체 보이게 */
+  width: 100%;
+  height: auto;                     /* 비율 유지 */
+  object-fit: contain;              /* 전체 보이게 */
   display: block;
 }
 
