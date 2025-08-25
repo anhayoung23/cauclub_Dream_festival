@@ -786,8 +786,8 @@ footer {
 /* 6분할 카드 보드: 항상 3열 × 2행, 각 카드 4:5 비율 */
 .f-board{
   /* 타일 너비(칼럼 폭) 변수: 기기폭에 따라 자동으로 크기 조절 */
-  --tileW: clamp(98px, 29vw, 180px);
-  --gap: clamp(6px, 2vw, 12px);
+  --tileW: clamp(82px, 22vw, 138px);
+  --gap: clamp(4px, 1.6vw, 9px);
    
   /* 3열 공정 */
   display: grid;
@@ -897,10 +897,10 @@ html.f-noScroll, body.f-noScroll{ overflow: hidden !important; }
 @media (prefers-reduced-motion: reduce){
   .f-card{ transition: none; }
 }
-@media (max-width: 340px){
+@media (max-width: 360px){
    .f-board{
-      --tileW: 108px;
-      --gap: 8px;
+      --tileW: 92px;
+      --gap: 6px;
    }
 @media (min-width: 768px){ .f-intro__grid{ grid-template-columns: repeat(2,1fr); } }
 .f-intro__col--full{ grid-column: 1 / -1; }
