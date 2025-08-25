@@ -10,9 +10,6 @@
   --orange2: #e8410b;
   --black: #2f2f2f;
 
-  --f-hero-w: 280px;
-  --f-tile-w: 110px;
-  --f-gap: 10px; /* 카드 간격 */
 }
 
 /* ================================
@@ -778,14 +775,14 @@ footer {
 .f-board{
   /* 바깥 컨테이너 */
   /*width: 100%; */
-  max-width: 720px;
+  max-width: 720px; /* 전체 최대 폭 */
   margin: 16px auto 0;
   padding: 0 10px;
   /* perspective: 1000px; */
    
   /* 3열 공정 */
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 모바일/브라우저 공통 3열 고정 */
+  grid-template-columns: repeat(3, 150px); /* 모바일/브라우저 공통 3열 고정 */
   /* grid-auto-rows: 1fr; */
   gap: 14px;
 
@@ -794,7 +791,7 @@ footer {
 }
 
 .f-tile{
-  width: 100px;
+  width: 150px; /* 카드 가로 고정 */
   max-width: 250px;
   position: relative;
   aspect-ratio: 4 / 5;        /* 요청 비율 고정 */
