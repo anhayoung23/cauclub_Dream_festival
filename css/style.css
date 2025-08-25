@@ -739,27 +739,31 @@ footer {
 
 /* 본문 전체: 고정 header/footer와 겹치지 않게 상하 패딩 */
 .f-main{
-  padding: 90px 0 70px; /* header, footer 높이 고려 */
+  padding: 90px 0 74px; /* header, footer 높이 고려 */
 }
 
 /* 히어로 (본문 위 포스터) */
-.f-hero{ margin: 12px auto 10px; text-align:center; }
+.f-hero{ 
+   margin: 10px auto 8px; 
+   text-align: center; 
+}
 .f-hero__frame{
-  width: min(100%, 520px);
+  width: min(80%, 280px);
   aspect-ratio: 4 / 5;        /* 인스타 4:5 */
-  margin: 0 auto;
+  margin: 0 auto 10px;
   overflow: hidden;
 }
 .f-hero__frame img{
-  width: 100%; height: 100%;
+  width: 100%; 
+  height: auto;
   object-fit: contain;        /* 전체 보이게 */
   display: block;
 }
 
 /* 안내글(텍스트) */
 .f-intro{
-  margin: 0px auto 18px;
-  max-width: 880px;
+  margin: 0px auto 14px;
+  max-width: 720px;
   padding: 0 12px;
   text-align: center;
 }
@@ -771,7 +775,7 @@ footer {
 }
 .f-intro__grid{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 8px 14px;
 }
 .f-intro__col--full{ grid-column: 1 / -1; }
@@ -781,13 +785,24 @@ footer {
 
 /* 6분할 카드 보드: 항상 3열 × 2행, 각 카드 4:5 비율 */
 .f-board{
-  width: min(100%, 980px);
-  margin: 10px auto 0;
-  padding: 0 8px;
+  /* 타일 너비(칼럼 폭) 변수: 기기폭에 따라 자동으로 크기 조절 */
+  --tileW: clamp(98px, 29vw, 180px);
+  --gap: clamp(6px, 2vw, 12px);
+   
+  /* 3열 공정 */
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 모바일/브라우저 공통 3열 고정 */
-  grid-auto-rows: 1fr;
-  gap: 5px;
+  grid-template-columns: repeat(3, var(--tileW); /* 모바일/브라우저 공통 3열 고정 */
+  /* grid-auto-rows: 1fr; */
+  gap: var(--gap);
+
+  /* 그리드 자체를 가운데로 */
+  justify-content: center;
+
+  /* 바깥 컨테이너 */
+  width: 100%;
+  max-width: 980px;
+  margin: 12px auto 0;
+  padding: 0 10px;
   perspective: 1000px;
 }
 .f-tile{
@@ -800,6 +815,7 @@ footer {
 .f-tile:focus-visible{
   box-shadow: 0 0 0 3px rgba(71,162,210,.45);
   border-radius: 8px;
+  min-width: var(--tileW); /* 트랙 폭과 동일하게 */
 }
 
 /* 실제 뒤집히는 카드 본체 */
@@ -881,6 +897,13 @@ html.f-noScroll, body.f-noScroll{ overflow: hidden !important; }
 @media (prefers-reduced-motion: reduce){
   .f-card{ transition: none; }
 }
+@media (max-width: 340px){
+   .f-board{
+      --tileW: 108px;
+      --gap: 8px;
+   }
+@media (min-width: 768px){ .f-intro__grid{ grid-template-columns: repeat(2,1fr); } }
+.f-intro__col--full{ grid-column: 1 / -1; }
 
 .page-intro{
    margin: 8px 0 14px;
