@@ -795,7 +795,7 @@ footer {
    
   /* 3열 공정 */
   display: grid;
-  grid-template-columns: repeat(3, 1fr; /* 모바일/브라우저 공통 3열 고정 */
+  grid-template-columns: repeat(3, 1fr); /* 모바일/브라우저 공통 3열 고정 */
   /* grid-auto-rows: 1fr; */
   gap: 8px;
 
