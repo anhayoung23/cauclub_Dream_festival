@@ -799,7 +799,7 @@ footer {
 }
 
 .f-tile{
-  width: 100% /* 카드 가로 고정 */
+  width: 100%; /* 카드 가로 고정 */
   /* max-width: 250px; */
   position: relative;
   aspect-ratio: 4 / 5;        /* 요청 비율 고정 */
