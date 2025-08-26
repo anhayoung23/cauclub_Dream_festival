@@ -736,7 +736,7 @@ footer {
 
 /* 히어로 이미지(본문 위 포스터): 크기는 작게, 정렬은 가운데로 */
 .f-hero{ 
-   margin: 0 auto 8px !important; 
+   margin: 0 auto 6px !important; 
    text-align: center;
 }
 .f-hero__frame{
@@ -746,7 +746,7 @@ footer {
   padding: 0 !important;                  /* 좌우 여백 */
   box-sizing: border-box;           /* padding 포함 계산 */
   
-  aspect-ratio: 4 / 5;              /* 캐릭터 이미지는 4:5 비율 */
+  aspect-ratio: auto;              /* 캐릭터 이미지는 4:5 비율 */
   display: flex;                    /* 이미지 정렬을 위해 flex */
   justify-content: center;          /* 수평 가운데 */
   align-items: center;              /* 수직 가운데 */
