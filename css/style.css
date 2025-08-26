@@ -727,7 +727,8 @@ footer {
 
 /* 본문 전체: 고정 header/footer와 겹치지 않게 상하 패딩 */
 .f-main{
-  padding: 78px 0 68px; /* header, footer 높이 고려 */
+  padding-top: 82px !imprtant; /* header, footer 높이 고려 */
+  padding-bottom: 64px;
   display: block; /* ✅ 세로 흐름으로 쌓이도록 기본 블록 레이아웃으로 강제 */
   overflow-x: hidden; /* 스크롤 가능 (혹시 상위에서 overflow 숨긴 경우 대비) */
    
@@ -735,14 +736,14 @@ footer {
 
 /* 히어로 이미지(본문 위 포스터): 크기는 작게, 정렬은 가운데로 */
 .f-hero{ 
-   margin: 0 auto 5px; 
+   margin: 0 auto 8px !important; 
    text-align: center;
 }
 .f-hero__frame{
   width: 100%;                     /* 기본 100% 폭 */
   max-width: 280px;                 /* page-content와 유사한 가독성 폭 */
   margin: 0 auto;                   /* 가운데 정렬 */
-  padding: 0 16px;                  /* 좌우 여백 */
+  padding: 0 !important;                  /* 좌우 여백 */
   box-sizing: border-box;           /* padding 포함 계산 */
   
   aspect-ratio: 4 / 5;              /* 캐릭터 이미지는 4:5 비율 */
@@ -759,7 +760,7 @@ footer {
 
 /* 안내글(본문_히어로 아래): 블록 흐름으로 세로 배치, 가운데 정렬 */
 .f-intro{
-  margin: 0 auto 5px;
+  margin: 0 auto 0 !important;
   max-width: 500px; /* 문단 가독 폭 */ 
   padding: 0 12px;
   text-align: center; /* ✅ 세로로 쌓이게 */
@@ -784,8 +785,8 @@ footer {
 .f-board{
   /* 바깥 컨테이너 */
   width: min(92vw, 420px);
-  margin: 0 auto 0;
-  padding: 0;
+  margin: 6px auto 0 !important;
+  padding: 0 !important;
   /* perspective: 1000px; */
    
   /* 3열 공정 */
@@ -806,6 +807,7 @@ footer {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   outline: none;
+  margin: 0 !important;
 }
 .f-tile:focus-visible{
   box-shadow: 0 0 0 3px rgba(71,162,210,.45);
