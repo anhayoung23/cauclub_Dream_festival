@@ -818,6 +818,7 @@ footer {
   inset: 0;
   transform-style: preserve-3d;
   transition: transform .34s cubic-bezier(.2,.7,.2,1);
+  transform-origin; center center;
   overflow: hidden;
   background: #0f1012;        /* 로딩 중 백업 배경 */
   box-shadow: 0 6px 16px rgba(0,0,0,.15);
