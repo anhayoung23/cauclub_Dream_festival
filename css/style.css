@@ -862,7 +862,7 @@ footer {
   background: rgba(0,0,0,.6);
   z-index: 2000;
   padding: 18px;
-  box-sizing: center;
+  box-sizing: center-box;
 }
 .f-focus.active{ display: grid; }
 .f-focus .f-card{
