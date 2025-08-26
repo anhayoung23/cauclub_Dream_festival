@@ -735,12 +735,12 @@ footer {
 
 /* 히어로 이미지(본문 위 포스터): 크기는 작게, 정렬은 가운데로 */
 .f-hero{ 
-   margin: 5px auto 5px; 
+   margin: 0 auto 5px; 
    text-align: center;
 }
 .f-hero__frame{
   width: 100%;                     /* 기본 100% 폭 */
-  max-width: 520px;                 /* page-content와 유사한 가독성 폭 */
+  max-width: 280px;                 /* page-content와 유사한 가독성 폭 */
   margin: 0 auto;                   /* 가운데 정렬 */
   padding: 0 16px;                  /* 좌우 여백 */
   box-sizing: border-box;           /* padding 포함 계산 */
@@ -759,9 +759,9 @@ footer {
 
 /* 안내글(본문_히어로 아래): 블록 흐름으로 세로 배치, 가운데 정렬 */
 .f-intro{
-  margin: 14px auto 14px;
-  max-width: 480px; /* 문단 가독 폭 */ 
-  padding: 0 16px;
+  margin: 0 auto 5px;
+  max-width: 500px; /* 문단 가독 폭 */ 
+  padding: 0 12px;
   text-align: center; /* ✅ 세로로 쌓이게 */
   display: block; /* flex/grid 아님 -> 세로 배치 */
 }
@@ -784,7 +784,7 @@ footer {
 .f-board{
   /* 바깥 컨테이너 */
   width: min(92vw, 420px);
-  margin: 12px auto 0;
+  margin: 0 auto 0;
   padding: 0;
   /* perspective: 1000px; */
    
@@ -792,7 +792,7 @@ footer {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 모바일/브라우저 공통 3열 고정 */
   /* grid-auto-rows: 1fr; */
-  gap: 7px;
+  gap: 5px;
 
   /* 그리드 자체를 가운데로 */
   justify-content: center;
