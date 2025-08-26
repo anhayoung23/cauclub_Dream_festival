@@ -784,10 +784,14 @@ footer {
 /* 6분할 카드 보드: 항상 3열 × 2행, 각 카드 4:5 비율 */
 .f-board{
   /* 바깥 컨테이너 */
-  width: min(92vw, 420px);
+  width: /*min(92vw, 420px)*/ 100%;
+  max-width: 420px;
   /*margin: 6px auto 0 !important;*/
   padding: 0 !important;
-  margin-top: 6px;
+  margin: 6px auto 0;
+  /* 좌우 패딩을 안내문(.page-content)과 동일하게 */
+  padding-left: 10px;
+  padding-right: 10px;
   /* 3열 공정 */
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 모바일/브라우저 공통 3열 고정 */
