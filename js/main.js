@@ -280,16 +280,41 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // back 이미지 선로딩
-  function preloadBackImages(scope){
-    const urls = [...scope.querySelectorAll('.f-back img, .face.back img')]
-      .map(img => img.getAttribute('src'))
-      .filter(Boolean);
-    urls.forEach((url) => {
-      const pic = new Image();
-      pic.decoding = 'async';
-      pic.src = url;
-    });
-  }
+  // ✅ back 이미지 선로딩 + 로드 완료 시 중앙 정렬 보강
+function preloadBackImages(scope){
+  const imgs = [...scope.querySelectorAll('.f-back img, .face.back img')];
+
+  const shouldCenterTarget = (imgEl) => {
+    const tile       = imgEl.closest('.f-tile, .tile');
+    const overlay    = document.getElementById('fFocus');
+    const overlayOn  = overlay && (overlay.classList.contains('is-active') || overlay.classList.contains('active'));
+    // 모바일(모달) 우선, 아니면 데스크톱(뒤집힌 타일)
+    return overlayOn ? (overlay.querySelector('.f-card, .card') || overlay) 
+                     : (tile && tile.classList.contains('is-flipped') ? tile : null);
+  };
+
+  const onReady = (imgEl) => {
+    const target = shouldCenterTarget(imgEl);
+    if(target) scrollTileToViewportCenter(target);
+  };
+
+  imgs.forEach((imgEl) => {
+    // 로딩 힌트
+    if(!imgEl.hasAttribute('loading')) imgEl.loading = 'lazy';
+    imgEl.decoding = 'async';
+
+    // 캐시되어 이미 로드된 경우에도 즉시 보정
+    if(imgEl.complete) onReady(imgEl);
+    else imgEl.addEventListener('load', () => onReady(imgEl), { once:true });
+
+    // 실제 프리로드(오프스크린 이미지) 유지
+    const pic = new Image();
+    pic.decoding = 'async';
+    pic.src = imgEl.currentSrc || imgEl.src;
+  });
+}
+
+  
 })();
 
 
